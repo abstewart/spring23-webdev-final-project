@@ -2,7 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
-import Project from "./project";
+import Project from "./pages";
+import Home from "./pages/home";
+import Login from "./pages/login";
+import MyProfile from "./pages/my-profile";
+import Profile from "./pages/profile";
+import Register from "./pages/register";
 
 
 
@@ -11,7 +16,15 @@ function App() {
       <BrowserRouter>
         <div className="container">
           <Routes>
-            <Route index element={<Labs/>}/>
+            <Route index element={<Home/>}/>
+            <Route path={`search`} element={<Home/>}/>
+            <Route path={`profile`} element={<MyProfile/>}/>
+            <Route path={`profile/:uid`} element={<Profile/>}/>
+            <Route path={`login`} element={<Login/>}/>
+            <Route path={`register`} element={<Register/>}/>
+            <Route path={`details`} element={<Home/>}/>
+
+
             <Route path="/project" element={<Project/>}/>
           </Routes>
         </div>

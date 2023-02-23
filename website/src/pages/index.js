@@ -1,7 +1,8 @@
 import LoginForm from "./login";
-import RegisterForm from "./register/register-form";
+
 import MyProfile from "./my-profile";
 import Profile from "./profile";
+import Register from "./register";
 
 function Project() {
   return(
@@ -10,7 +11,7 @@ function Project() {
         <LoginForm/>
       </div>
       <div className="col-6">
-        <RegisterForm/>
+        <Register/>
       </div>
       <div>
         <MyProfile/>
