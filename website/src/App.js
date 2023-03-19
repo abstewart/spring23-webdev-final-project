@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import MyProfile from "./pages/my-profile";
 import Profile from "./pages/profile";
 import Register from "./pages/register";
+import Search from "./pages/search";
 
 
 
@@ -17,14 +18,12 @@ function App() {
         <div className="container">
           <Routes>
             <Route index element={<Home/>}/>
-            <Route path={`search`} element={<Home/>}/>
+            <Route path={`search`} element={<Search/>}/>
             <Route path={`profile`} element={<MyProfile/>}/>
             <Route path={`profile/:uid`} element={<Profile/>}/>
             <Route path={`login`} element={<Login/>}/>
             <Route path={`register`} element={<Register/>}/>
             <Route path={`details`} element={<Home/>}/>
-
-
             <Route path="/project" element={<Project/>}/>
           </Routes>
         </div>
