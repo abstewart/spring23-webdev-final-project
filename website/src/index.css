@@ -1,1 +1,19 @@
+:root {
+  /*--bs-body-bg: #272b30;*/
+  /*--bs-body-bg: #5C4033;*/
+  --bs-body-bg: #6B4423;
+  --bs-body-bg-rgb: 107, 68, 35;
+  /*--bs-body-bg: #483C32;*/
+
+  /*Trying out different colors for labels/body, slightly darker?*/
+  /*--bs-body-color: #aaa; original*/
+  /*--bs-body-color-rgb: 170, 170, 170;*/
+  --bs-body-color: #8f8f8f;
+  --bs-body-color-rgb: 115, 115, 115;
+}
+
+.form-control{
+  color: #272b30;
+  background-color: #e1e1e1;
+}
 
