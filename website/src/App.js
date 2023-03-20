@@ -22,9 +22,9 @@ function App() {
             <Route path={`profile/:uid`} element={<Profile/>}/>
             <Route path={`login`} element={<Login/>}/>
             <Route path={`register`} element={<Register/>}/>
-            <Route path={`details`} element={<Home/>}/>
+            <Route path={`details/:pid`} element={<Home/>}/>
 
-
+            {/*Testing route for multiple components*/}
             <Route path="/project" element={<Project/>}/>
           </Routes>
         </div>
