@@ -1,7 +1,10 @@
+import React from "react";
+import HomeSidebar from "./sidebar/index";
+
 const Home = () => {
   return (
       <>
-        <h1>Home</h1>
+          <HomeSidebar/>
       </>
   );
 }
