@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import MyProfile from "./pages/my-profile";
 import Profile from "./pages/profile";
 import Register from "./pages/register";
+import NavBar from "./components/nav-bar";
 
 
 
@@ -17,15 +18,18 @@ function App() {
         <div className="container">
           <Routes>
             <Route index element={<Home/>}/>
-            <Route path={`search`} element={<Home/>}/>
-            <Route path={`profile`} element={<MyProfile/>}/>
-            <Route path={`profile/:uid`} element={<Profile/>}/>
-            <Route path={`login`} element={<Login/>}/>
-            <Route path={`register`} element={<Register/>}/>
-            <Route path={`details/:pid`} element={<Home/>}/>
+            <Route path={`/home`} element={<Home/>}/>
+            <Route path={`/search`} element={<Home/>}/>
+            <Route path={`/profile`} element={<MyProfile/>}/>
+            <Route path={`/profile/:uid`} element={<Profile/>}/>
+            <Route path={`/login`} element={<Login/>}/>
+            <Route path={`/register`} element={<Register/>}/>
+            <Route path={`/details/:pid`} element={<Home/>}/>
 
             {/*Testing route for multiple components*/}
             <Route path="/project" element={<Project/>}/>
+            <Route path="/nav" element={<NavBar/>}/>
+
           </Routes>
         </div>
       </BrowserRouter>
