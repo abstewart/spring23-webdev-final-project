@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Home",
+    "link": "/"
+  },
+  {
+    "name": "Search",
+    "link": "/search"
+  },
+  {
+    "name": "MyProfile",
+    "link": "/profile"
+  },
+  {
+    "name": "Login",
+    "link": "/login"
+  },
+  {
+    "name": "Profiles",
+    "link": "/home"
+  },
+  {
+    "name": "Parks",
+    "link": "/search"
+  }
+]
