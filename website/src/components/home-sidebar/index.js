@@ -10,14 +10,14 @@ const HomeSidebar = () => {
             <div className="row pt-4">
                 <h3>Looking for Something?</h3>
                 {/* Search Bar: Replace link with reference to search page*/}
-                <button className="btn btn-primary" href="#">
+                <button className="btn btn-primary">
                     Search
                 </button>
             </div>
             <div className="row pt-4">
                 {/* Placeholder will be replaced with most recent post if logged in and random content if not */}
                 <img
-                    src="../images/placeholder.jpg"
+                    src="../../pages/home/images/placeholder.jpg"
                     className="p-0 m-0 img-fluid h-25"
                     alt="placeholder image"
                 />

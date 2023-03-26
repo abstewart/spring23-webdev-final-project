@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
@@ -9,6 +8,7 @@ import MyProfile from "./pages/my-profile";
 import Profile from "./pages/profile";
 import Register from "./pages/register";
 import NavBar from "./components/nav-bar";
+import Search from "./pages/search";
 
 
 
@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route index element={<Home/>}/>
             <Route path={`/home`} element={<Home/>}/>
-            <Route path={`/search`} element={<Home/>}/>
+            <Route path={`/search`} element={<Search/>}/>
             <Route path={`/profile`} element={<MyProfile/>}/>
             <Route path={`/profile/:uid`} element={<Profile/>}/>
             <Route path={`/login`} element={<Login/>}/>
