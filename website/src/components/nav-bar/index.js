@@ -17,22 +17,22 @@ const NavBar = () => {
                   <Link className="nav-link" to="/home">Home</Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/search">Search</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="#">smth</Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/login">Login</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/register">Register</a>
+                  <Link className="nav-link" to="/register">Register</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/search">About</a>
+                  <Link className="nav-link disabled" to="/profile">Profile</Link>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/profile">Profile</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/profile">Profile</a>
-                </li>
-                <li className="nav-item">
-                  <div className="nav-fill">
+                <li className="d-flex p-2">
+                  <div className="navbar-text">
                     <span>Welcome:&nbsp;</span>
                     <span>Anonymous</span>
                   </div>
