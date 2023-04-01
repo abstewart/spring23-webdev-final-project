@@ -3,7 +3,7 @@
 import {Link} from "react-router-dom";
 
 
-const NavBar = () => {
+const NavBar = ({active = null}) => {
   return(
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -12,22 +12,22 @@ const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarColor01">
               <ul className="navbar-nav me-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/home">Home</Link>
+                  <Link className={`nav-link ${active === 'home'?'active':''}`} to="/home">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/search">Search</Link>
+                  <Link className={`nav-link ${active === 'search'?'active':''}`} to="/search">Search</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#">smth</Link>
+                  <Link className={`nav-link ${active === 'smth'?'active':''}`} to="#">smth</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">Login</Link>
+                  <Link className={`nav-link ${active === 'login'?'active':''}`} to="/login">Login</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/register">Register</Link>
+                  <Link className={`nav-link ${active === 'register'?'active':''}`} to="/register">Register</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link disabled" to="/profile">Profile</Link>
+                  <Link className={`nav-link ${active === 'profile'?'active':''}`} to="/profile">Profile</Link>
                 </li>
                 <li className="d-flex p-2">
                   <div className="navbar-text">
