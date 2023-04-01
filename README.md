@@ -1,5 +1,8 @@
 # spring23-webdev-final-project
 
-# Link to netlify website
-https://main--celebrated-souffle-0b61bd.netlify.app/
-Push to github to see changes reflected on website after deploy.
+## Various Links ##
+- [react GitHub repo](https://github.com/abstewart/spring23-webdev-final-project)
+- [node GitHub repo](https://github.com/abstewart/spring23-webdev-final-project-node)
+- [Netlify website (main branch)](https://main--celebrated-souffle-0b61bd.netlify.app/)
+
+
