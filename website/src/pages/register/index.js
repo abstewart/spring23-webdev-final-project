@@ -4,7 +4,7 @@ import NavBar from "../../components/nav-bar";
 
 const Register = () => {
   return(
-      <>
+      <div className={`container`}>
         <NavBar active="register"/>
         <h1 className={`display-3 text-center`}>Register</h1>
         <div className="form-floating mb-2">
@@ -39,7 +39,7 @@ const Register = () => {
           <input id="register_password_2" type="password" className="form-control"/>
           <label className={`text-dark`} htmlFor={`register_password_2`}>Repeat Password</label>
         </div>
-      </>
+      </div>
   );
 }
 
