@@ -10,29 +10,32 @@ import Register from "./pages/register";
 import NavBar from "./components/nav-bar";
 import Search from "./pages/search";
 
-
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
-      <BrowserRouter>
-        <div className="container">
-          <Routes>
-            <Route index element={<Home/>}/>
-            <Route path={`/home`} element={<Home/>}/>
-            <Route path={`/search`} element={<Search/>}/>
-            <Route path={`/profile`} element={<MyProfile/>}/>
-            <Route path={`/profile/:uid`} element={<Profile/>}/>
-            <Route path={`/login`} element={<Login/>}/>
-            <Route path={`/register`} element={<Register/>}/>
-            <Route path={`/details/:pid`} element={<Home/>}/>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="container">
+            <Routes>
+              <Route index element={<Home/>}/>
+              <Route path={`/home`} element={<Home/>}/>
+              <Route path={`/search`} element={<Search/>}/>
+              <Route path={`/profile`} element={<MyProfile/>}/>
+              <Route path={`/profile/:uid`} element={<Profile/>}/>
+              <Route path={`/login`} element={<Login/>}/>
+              <Route path={`/register`} element={<Register/>}/>
+              <Route path={`/details/:pid`} element={<Home/>}/>
 
-            {/*Testing route for multiple components*/}
-            <Route path="/project" element={<Project/>}/>
-            <Route path="/nav" element={<NavBar/>}/>
+              {/*Testing route for multiple components*/}
+              <Route path="/project" element={<Project/>}/>
+              <Route path="/nav" element={<NavBar/>}/>
 
-          </Routes>
-        </div>
-      </BrowserRouter>
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </Provider>
   );
 }
 
