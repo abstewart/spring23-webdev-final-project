@@ -1,9 +1,11 @@
-//nav bar component
-
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutThunk} from "../../services/users/users-thunks";
 
 
 const NavBar = ({active = null}) => {
+  const { currentUser } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   return(
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -30,9 +32,10 @@ const NavBar = ({active = null}) => {
                   <Link className={`nav-link ${active === 'profile'?'active':''}`} to="/profile">Profile</Link>
                 </li>
                 <li className="d-flex p-2">
-                  <div className="navbar-text">
+                  <div className="text-light h4 mb-0 align-self-center">
                     <span>Welcome:&nbsp;</span>
-                    <span>Anonymous</span>
+                    <span>{currentUser ? currentUser.username : "Anonymous"}
+                    </span>
                   </div>
                 </li>
                 {/*<li className="nav-item dropdown">*/}
@@ -50,6 +53,11 @@ const NavBar = ({active = null}) => {
                 {/*</li>*/}
               </ul>
               <div className="d-flex">
+                {currentUser &&
+                    <button onClick={() => dispatch(logoutThunk())}
+                    className="btn btn-warning">
+                      Logout
+                    </button>}
                 <input className="form-control me-sm-2" type="text"
                        placeholder="Search"/>
                 <button className="btn btn-secondary my-2 my-sm-0"

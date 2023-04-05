@@ -55,7 +55,16 @@ const LoginForm = () => {
               Login
             </button>
           </div>
-          <div>
+        </div>
+      </div>
+  );
+}
+
+export default LoginForm;
+
+//code to display user and password
+/*
+<div>
             {currentUser && (
                 <div>
                   <h2>{currentUser.username}</h2>
@@ -63,9 +72,4 @@ const LoginForm = () => {
                 </div>
             )}
           </div>
-        </div>
-      </div>
-  );
-}
-
-export default LoginForm;
+ */
