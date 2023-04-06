@@ -1,35 +1,67 @@
 import React from 'react';
+import {Link} from "react-router-dom";
+import NavBar from "../nav-bar";
 
 const HomeSidebar = () => {
     return (
-        <div className="col-5 float-end">
-            <div className="row">
-                <h1>NAME OF WEBSITE</h1>
-                <h6>Description of why we made this website...</h6>
+        <div className={"container text-center"}>
+            <NavBar/>
+            <div className={"row pt-5"}>
+            <div className={"col-8 pt-2"}>
+
+                <div className={"row"}>
+                    <img
+                        src="https://via.placeholder.com/1000x400"
+                        className="img-fluid"
+                        alt="Placeholder"
+                    />
+                </div>
+                <div className={"row"}>
+                    <img
+                        src="https://via.placeholder.com/1000x400"
+                        className="img-fluid"
+                        alt="Placeholder"
+                    />
+                </div>
             </div>
-            <div className="row pt-4">
-                <h3>Looking for Something?</h3>
-                {/* Search Bar: Replace link with reference to search page*/}
-                <button className="btn btn-primary">
-                    Search
-                </button>
-            </div>
-            <div className="row pt-4">
-                {/* Placeholder will be replaced with most recent post if logged in and random content if not */}
-                <img
-                    src="../../pages/home/images/placeholder.jpg"
-                    className="p-0 m-0 img-fluid h-25"
-                    alt="placeholder image"
-                />
-            </div>
-            <div className="row pt-5">
-                <h2>Join OUR community!</h2>
-                // TODO: Replace link with reference to login page
-                <button className="btn btn-primary" href="../login">
-                    Sign Up/Log In
-                </button>
+            <div className="col-4">
+                <div className="row">
+                    <h1>Welcome to our National Parks website!</h1>
+                    <h6>Explore the natural beauty of America's National Parks.</h6>
+                </div>
+                <hr></hr>
+                <div className="row">
+                    <h3>Looking for something?</h3>
+                    <Link to="/search" className="btn btn-primary">
+                        Search for a Park
+                    </Link>
+                </div>
+                <div>
+                    <hr></hr>
+                    <div>
+                        <img
+                            src="https://via.placeholder.com/500x300"
+                            className="img-fluid"
+                            alt="Placeholder"
+                        />
+                    </div>
+                </div>
+                <div className="row mt-5">
+                    <div className="col-6">
+                        <Link to="/register" className="btn btn-secondary">
+                            Join us!
+                        </Link>
+                    </div>
+                    <div className="col-6">
+                        <Link to="/login" className="btn btn-secondary">
+                            Log In
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
+        </div>
+
     );
 };
 
