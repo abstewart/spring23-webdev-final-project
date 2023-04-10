@@ -4,12 +4,6 @@ import {logoutThunk, profileThunk} from "../../services/users/users-thunks";
 import {useEffect} from "react";
 
 const NavBar = ({active = null}) => {
-  const getCurrUser = async () => {
-    await dispatch(profileThunk());
-  }
-  useEffect(() => {
-    getCurrUser();
-  }, [])
 
   const { currentUser } = useSelector((state) => state.users);
   const dispatch = useDispatch();

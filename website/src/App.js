@@ -12,27 +12,30 @@ import Search from "./pages/search";
 
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import CurrentUserContext from "./redux/current-user-context";
 
 function App() {
   return (
       <Provider store={store}>
         <BrowserRouter>
           <div className="container">
-            <Routes>
-              <Route index element={<Home/>}/>
-              <Route path={`/home`} element={<Home/>}/>
-              <Route path={`/search`} element={<Search/>}/>
-              <Route path={`/profile`} element={<MyProfile/>}/>
-              <Route path={`/profile/:uid`} element={<Profile/>}/>
-              <Route path={`/login`} element={<Login/>}/>
-              <Route path={`/register`} element={<Register/>}/>
-              <Route path={`/details/:pid`} element={<Home/>}/>
+            <CurrentUserContext>
+              <Routes>
+                <Route index element={<Home/>}/>
+                <Route path={`/home`} element={<Home/>}/>
+                <Route path={`/search`} element={<Search/>}/>
+                <Route path={`/profile`} element={<MyProfile/>}/>
+                <Route path={`/profile/:uid`} element={<Profile/>}/>
+                <Route path={`/login`} element={<Login/>}/>
+                <Route path={`/register`} element={<Register/>}/>
+                <Route path={`/details/:pid`} element={<Home/>}/>
 
-              {/*Testing route for multiple components*/}
-              <Route path="/project" element={<Project/>}/>
-              <Route path="/nav" element={<NavBar/>}/>
+                {/*Testing route for multiple components*/}
+                <Route path="/project" element={<Project/>}/>
+                <Route path="/nav" element={<NavBar/>}/>
 
-            </Routes>
+              </Routes>
+            </CurrentUserContext>
           </div>
         </BrowserRouter>
       </Provider>
