@@ -8,7 +8,9 @@ import {
   findUserByIdThunk,
   loginThunk,
   logoutThunk,
-  registerThunk} from "../services/users/users-thunks";
+  registerThunk,
+  profileThunk} from "../services/users/users-thunks";
+import {profile} from "../services/users/users-service";
 
 const initialState = {
   users: [],
@@ -61,6 +63,9 @@ const usersSlice = createSlice({
     [registerThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
     },
+    [profileThunk.fulfilled]: (state, action) => {
+      state.currentUser = action.payload;
+    }
   },
 });
 export default usersSlice.reducer;

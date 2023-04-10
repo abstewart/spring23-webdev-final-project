@@ -11,30 +11,35 @@ export const findAllUsers = async () => {
   return response.data;
 };
 
-export const findUserById = (id) => {
-  return api.get(`${USERS_API}/${id}`).then((response) => response.data);
+export const findUserById = async (id) => {
+  return await api.get(`${USERS_API}/${id}`).then((response) => response.data);
 };
 
-export const createUser = (user) => {
-  return api.post(USERS_API, user);
+export const createUser = async (user) => {
+  return await api.post(USERS_API, user);
 };
 
-export const updateUser = (newUser) => {
-  return api.put(`${USERS_API}/${newUser.id}`, newUser);
+export const updateUser = async (newUser) => {
+  return await api.put(`${USERS_API}/${newUser.id}`, newUser);
 };
 
-export const deleteUser = (id) => {
-  return api.delete(`${USERS_API}/${id}`);
+export const deleteUser = async (id) => {
+  return await api.delete(`${USERS_API}/${id}`);
 };
 
-export const login = (user) => {
-  return api.post(`${USERS_API}/login`, user);
+export const login = async (user) => {
+  return await api.post(`${USERS_API}/login`, user);
 };
 
-export const logout = () => {
-  return api.post(`${USERS_API}/logout`);
+export const logout = async () => {
+  return await api.post(`${USERS_API}/logout`);
 };
 
-export const register = (user) => {
-  return api.post(`${USERS_API}/register`, user);
+export const register = async (user) => {
+  return await api.post(`${USERS_API}/register`, user);
+};
+
+export const profile = async () => {
+  const ret = await api.get(`${USERS_API}/profile`);
+  return ret;
 };

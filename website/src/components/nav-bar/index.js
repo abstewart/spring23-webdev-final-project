@@ -1,9 +1,16 @@
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutThunk} from "../../services/users/users-thunks";
-
+import {logoutThunk, profileThunk} from "../../services/users/users-thunks";
+import {useEffect} from "react";
 
 const NavBar = ({active = null}) => {
+  const getCurrUser = async () => {
+    await dispatch(profileThunk());
+  }
+  useEffect(() => {
+    getCurrUser();
+  }, [])
+
   const { currentUser } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   return(
