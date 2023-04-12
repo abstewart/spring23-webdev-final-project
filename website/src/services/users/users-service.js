@@ -39,7 +39,7 @@ export const register = async (user) => {
   return await api.post(`${USERS_API}/register`, user);
 };
 
-export const profile = async () => {
-  const ret = await api.get(`${USERS_API}/profile`);
+export const getCurrentUser = async () => {
+  const ret = await api.get(`${USERS_API}/currentUser`);
   return ret;
 };

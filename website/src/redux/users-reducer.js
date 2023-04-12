@@ -10,7 +10,7 @@ import {
   logoutThunk,
   registerThunk,
   profileThunk} from "../services/users/users-thunks";
-import {profile} from "../services/users/users-service";
+import {getCurrentUser} from "../services/users/users-service";
 
 const initialState = {
   users: [],
