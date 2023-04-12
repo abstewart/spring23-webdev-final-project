@@ -12,7 +12,7 @@ export const findAllUsers = async () => {
 };
 
 export const findUserById = async (id) => {
-  return await api.get(`${USERS_API}/${id}`).then((response) => response.data);
+  return await api.get(`${USERS_API}/id/${id}`).then((response) => response.data);
 };
 
 export const createUser = async (user) => {
