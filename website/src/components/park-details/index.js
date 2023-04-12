@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Create_review from "../create_review";
+import {getParkDetails} from "../../services/nps/nps-service";
 
 const ParkDetails = ({ parkCode }) => {
     const [park, setPark] = useState(null);
@@ -11,9 +12,8 @@ const ParkDetails = ({ parkCode }) => {
             setIsLoading(true);
 
             try {
-                const response = await fetch(`https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=CsPUxsJjlI83u6XabTVnAbX5kCQXBDv9HJQcpUUM`);
-                const data = await response.json();
-                setPark(data.data[0]);
+                const response = await getParkDetails(parkCode);
+                setPark(response.data[0]);
                 setIsLoading(false);
             } catch (error) {
                 setError(error.message);

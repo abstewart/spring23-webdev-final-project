@@ -7,7 +7,7 @@ import NavBar from "../../components/nav-bar";
 const Search = () => {
     return (
         <>
-            <NavBar/>
+            <NavBar active="search"/>
             <div className={"row pt-5"}>
                 <div className={"col-4"}>
                     <SearchSidebar/>

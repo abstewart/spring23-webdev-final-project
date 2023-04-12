@@ -8,10 +8,9 @@ export const SearchParkDetailsCard = (
     const [park, setPark] = useState(null);
     useEffect(() => {
         const fetchPark = async () => {
-            // const response = await fetch(`https://developer.nps.gov/api/v1/parks?parkCode=${parkCode}&api_key=CsPUxsJjlI83u6XabTVnAbX5kCQXBDv9HJQcpUUM`);
             // const data = await response.json();
-          const data = await getParkDetails(parkCode);
-          setPark(data.data[0]);
+          const resp = await getParkDetails(parkCode);
+          setPark(resp.data[0]);
         };
         fetchPark();
     }, [parkCode]);
