@@ -54,8 +54,17 @@ const usersSlice = createSlice({
       state.loading = false;
       state.currentUser = action.payload;
     },
+    [loginThunk.pending]: (state, action) => {
+      state.error = null;
+      state.loading = true;
+    },
     [loginThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
+      state.loading = false;
+    },
+    [loginThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
     },
     [logoutThunk.fulfilled]: (state, action) => {
       state.currentUser = null;

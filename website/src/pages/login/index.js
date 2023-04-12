@@ -6,7 +6,7 @@ import {loginThunk} from "../../services/users/users-thunks";
 
 const LoginForm = () => {
 
-  const { currentUser } = useSelector((state) => state.users);
+  const { currentUser, loading, error } = useSelector((state) => state.users);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -55,6 +55,14 @@ const LoginForm = () => {
               Login
             </button>
           </div>
+          {
+            loading &&
+              <h2>Loading</h2>
+          }
+          {
+            error &&
+              <h2>{error}</h2>
+          }
         </div>
       </div>
   );
