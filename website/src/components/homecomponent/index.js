@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import NavBar from "../nav-bar";
+import RandomImage from "../random_park_image";
 
-const HomeSidebar = () => {
+
+const HomeComponent = () => {
+    const [randomPark, setRandomPark] = useState(null);
+    const [randomImage, setRandomImage] = useState(null);
+
+
     return (
         <div className={"container text-center"}>
             <NavBar/>
@@ -10,18 +16,10 @@ const HomeSidebar = () => {
             <div className={"col-8 pt-2"}>
 
                 <div className={"row"}>
-                    <img
-                        src="https://via.placeholder.com/1000x400"
-                        className="img-fluid"
-                        alt="Placeholder"
-                    />
+                    <RandomImage/>
                 </div>
                 <div className={"row"}>
-                    <img
-                        src="https://via.placeholder.com/1000x400"
-                        className="img-fluid"
-                        alt="Placeholder"
-                    />
+                    <RandomImage/>
                 </div>
             </div>
             <div className="col-4">
@@ -39,6 +37,8 @@ const HomeSidebar = () => {
                 <div>
                     <hr></hr>
                     <div>
+                        // if logged in, show last visited park
+                        // if not logged in, show anonymized review
                         <img
                             src="https://via.placeholder.com/500x300"
                             className="img-fluid"
@@ -65,4 +65,4 @@ const HomeSidebar = () => {
     );
 };
 
-export default HomeSidebar;
+export default HomeComponent;

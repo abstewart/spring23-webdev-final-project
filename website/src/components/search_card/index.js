@@ -10,7 +10,7 @@ export const SearchParkDetailsCard = (
         const fetchPark = async () => {
             // const data = await response.json();
           const resp = await getParkDetails(parkCode);
-          setPark(resp.data[0]);
+          setPark(resp[0]);
         };
         fetchPark();
     }, [parkCode]);

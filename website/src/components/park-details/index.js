@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Create_review from "../create_review";
 import {getParkDetails} from "../../services/nps/nps-service";
+import ReviewForm from "../create_review";
 
 const ParkDetails = ({ parkCode }) => {
     const [park, setPark] = useState(null);
@@ -13,7 +13,7 @@ const ParkDetails = ({ parkCode }) => {
 
             try {
                 const response = await getParkDetails(parkCode);
-                setPark(response.data[0]);
+                setPark(response[0]);
                 setIsLoading(false);
             } catch (error) {
                 setError(error.message);
@@ -135,7 +135,7 @@ const ParkDetails = ({ parkCode }) => {
                 <div><b> Latitude, Longitude: </b>{park.latitude}, {park.longitude}</div>
             </div>
 
-            <Create_review parkCode={parkCode}/>
+            <ReviewForm parkCode={parkCode}/>
         </div>
     );
 };

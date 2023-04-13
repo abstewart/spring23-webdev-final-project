@@ -22,10 +22,10 @@ export const createReview = async (review) => {
   const response = await api.post(REVIEWS_API, review);
   return response.data;
 };
-export const updateReview = async () => {
-  const response = await api.put(REVIEWS_API, review);
-  return response.data;
-};
+//export const updateReview = async () => {
+//  const response = await api.put(REVIEWS_API, review);
+//  return response.data;
+//};
 export const deleteReview = async (rId) => {
   const response = await api.delete(`${REVIEWS_API}/rId`)
   return response.data;
