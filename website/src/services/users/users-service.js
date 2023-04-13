@@ -12,34 +12,41 @@ export const findAllUsers = async () => {
 };
 
 export const findUserById = async (id) => {
-  return await api.get(`${USERS_API}/id/${id}`).then((response) => response.data);
+  const response = await api.get(`${USERS_API}/id/${id}`);
+  return response.data;
 };
 
 export const createUser = async (user) => {
-  return await api.post(USERS_API, user);
+  const response = await api.post(USERS_API, user);
+  return response.data;
 };
 
 export const updateUser = async (newUser) => {
-  return await api.put(`${USERS_API}/${newUser.id}`, newUser);
+  const response = await api.put(`${USERS_API}/${newUser.id}`, newUser);
+  return response.data;
 };
 
 export const deleteUser = async (id) => {
-  return await api.delete(`${USERS_API}/${id}`);
+  const response = await api.delete(`${USERS_API}/${id}`);
+  return response.data;
 };
 
 export const login = async (user) => {
-  return await api.post(`${USERS_API}/login`, user);
+  const response = await api.post(`${USERS_API}/login`, user);
+  return response.data;
 };
 
 export const logout = async () => {
-  return await api.post(`${USERS_API}/logout`);
+  const response = await api.post(`${USERS_API}/logout`);
+  return response.data;
 };
 
 export const register = async (user) => {
-  return await api.post(`${USERS_API}/register`, user);
+  const response = await api.post(`${USERS_API}/register`, user);
+  return response.data;
 };
 
 export const getCurrentUser = async () => {
   const ret = await api.get(`${USERS_API}/currentUser`);
-  return ret;
+  return ret.data;
 };
