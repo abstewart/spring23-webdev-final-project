@@ -15,7 +15,7 @@ function ReviewForm({ parkCode }) {
         event.preventDefault();
         const author = currentUser['username']; // replace with actual code to get the logged in user
         const review = {
-            parkID: parkCode,
+            parkId: parkCode,
             author,
             rating,
             summary,
