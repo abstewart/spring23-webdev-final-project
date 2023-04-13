@@ -13,6 +13,7 @@ import Search from "./pages/search";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import CurrentUserContext from "./redux/current-user-context";
+import ParkDetails from "./components/park-details";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
                 <Route path={`/profile/:uid`} element={<Profile/>}/>
                 <Route path={`/login`} element={<Login/>}/>
                 <Route path={`/register`} element={<Register/>}/>
-                <Route path={`/details/:pid`} element={<Home/>}/>
+                <Route path={`/details/:pid`} element={<ParkDetails/>}/>
 
                 {/*Testing route for multiple components*/}
                 <Route path="/project" element={<Project/>}/>

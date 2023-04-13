@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {getParkDetails} from "../../services/nps/nps-service";
 import ReviewForm from "../create_review";
+import {useSelector} from "react-redux";
+import {useParams} from "react-router";
+import NavBar from "../nav-bar";
 
-const ParkDetails = ({ parkCode }) => {
+const ParkDetails = () => {
+  const {pid} = useParams();
+  const parkCode = pid;
     const [park, setPark] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -83,6 +88,7 @@ const ParkDetails = ({ parkCode }) => {
 
     return (
         <div className={"container"}>
+          <NavBar active="search"/>
             <div className={"row text-center"}><a href={park.url}><h1>{park.fullName}: {park.states}</h1></a></div>
             <div className={"row pt-3"}>
                 <div className={"col-8"}>
