@@ -5,6 +5,9 @@ const SearchSidebar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedState, setSelectedState] = useState('AL');
+    function refreshPage(){
+        window.location.reload();
+    }
 
     return(
         <div className="pt-3">
@@ -87,7 +90,7 @@ const SearchSidebar = () => {
             <br/>
             <div className="pt-2 ">
                 <Link to={"/results/" + searchTerm + "/" + selectedKeywords + "/" + selectedState}>
-                    <button className={"btn btn-primary"}>Search</button>
+                    <button className={"btn btn-primary"} onClick={refreshPage}>Search</button>
                 </Link>
             </div>
         </div>

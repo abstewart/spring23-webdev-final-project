@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {getParkDetails} from "../../services/nps/nps-service";
+import {Link} from "react-router-dom";
 
 export const SearchParkDetailsCard = (
     {
@@ -25,7 +26,7 @@ export const SearchParkDetailsCard = (
                 <img src={park.images?.[0]?.url} className="d-block w-100" alt={park.images?.[0]?.altText} />
             </div>
             <div className="card-body">
-                <a href={"/placeholder"}> <h4 className="card-title">{park.name}</h4> </a>
+                <Link to={"/details/" + parkCode}><h4>{park.name}</h4></Link>
                 <p className="card-text">{park.description}</p>
             </div>
         </div>
