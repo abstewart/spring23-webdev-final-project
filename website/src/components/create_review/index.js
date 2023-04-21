@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {useSelector} from "react-redux";
 import {createReview} from "../../services/reviews/reviews-service";
 
@@ -11,6 +11,14 @@ function ReviewForm({ parkCode }) {
     const handlePrivateToggle = () => {
         setIsPrivate(!isPrivate);
     };
+
+    function resetForm() {
+        setRating(5);
+        setSummary('');
+        setMessage('');
+        setIsPrivate(false);
+    }
+
     function handleSubmit(event) {
         event.preventDefault();
         const author = currentUser['username']; // replace with actual code to get the logged in user
@@ -21,21 +29,22 @@ function ReviewForm({ parkCode }) {
             summary,
             message,
             // likes: 0, // this will be added by the server
-            creation_date: Date.now(),
+            creation_date: new Date (Date.now()),
             hidden: isPrivate,
         };
         // do something with the review, e.g. send it to a server
         console.log(review);
-        createReview(review).then(r => console.log(r));
+        createReview(review).then(r => {console.log(r);resetForm()});
     }
 
     return (
         <div className="form-group text-center">
         <form onSubmit={handleSubmit} className={"form-control"}>
             <h2>Add a Review</h2>
-            <div className="form-check">
-                <label className="form-check-label" htmlFor="private">Make review private:</label>
-                <input className="form-check-input" type="checkbox" id="private" name="private" checked={isPrivate} onChange={handlePrivateToggle} />
+            <div className="form-group">
+                <label className="form-check-label pe-3" htmlFor="flexCheckDefault"> Private </label>
+                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={handlePrivateToggle}>
+                </input>
             </div>
             <label className="col-form-label mt-4">
                 <div> Rating: </div>

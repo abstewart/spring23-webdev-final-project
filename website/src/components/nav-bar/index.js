@@ -1,7 +1,6 @@
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutThunk, profileThunk} from "../../services/users/users-thunks";
-import {useEffect} from "react";
+import {logoutThunk} from "../../services/users/users-thunks";
 
 const NavBar = ({active = null}) => {
 
@@ -19,9 +18,6 @@ const NavBar = ({active = null}) => {
                 </li>
                 <li className="nav-item">
                   <Link className={`nav-link ${active === 'search'?'active':''}`} to="/search">Search</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className={`nav-link ${active === 'smth'?'active':''}`} to="#">smth</Link>
                 </li>
                 <li className="nav-item">
                   <Link className={`nav-link ${active === 'login'?'active':''}`} to="/login">Login</Link>

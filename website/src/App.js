@@ -4,7 +4,6 @@ import {Routes, Route} from "react-router";
 import Project from "./pages";
 import Home from "./pages/home";
 import Login from "./pages/login";
-import MyProfile from "./pages/my-profile";
 import Profile from "./pages/profile";
 import Register from "./pages/register";
 import NavBar from "./components/nav-bar";
@@ -14,6 +13,7 @@ import store from "./redux/store";
 import { Provider } from "react-redux";
 import CurrentUserContext from "./redux/current-user-context";
 import ParkDetails from "./components/park-details";
+import SearchResults from "./pages/search-results";
 
 function App() {
   return (
@@ -25,7 +25,8 @@ function App() {
                 <Route index element={<Home/>}/>
                 <Route path={`/home`} element={<Home/>}/>
                 <Route path={`/search`} element={<Search/>}/>
-                <Route path={`/profile`} element={<MyProfile/>}/>
+                <Route path={`/results/:val/:keywords/:state/`} element={<SearchResults/>}/>
+                <Route path={`/profile`} element={<Profile/>}/>
                 <Route path={`/profile/:uid`} element={<Profile/>}/>
                 <Route path={`/login`} element={<Login/>}/>
                 <Route path={`/register`} element={<Register/>}/>

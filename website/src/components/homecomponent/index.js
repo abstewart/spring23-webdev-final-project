@@ -1,12 +1,49 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import NavBar from "../nav-bar";
 import RandomImage from "../random_park_image";
-
+import {useSelector} from "react-redux";
+import ParkReview from "../review_card";
+import {findReviewsByPark, findReviewsByUser} from "../../services/reviews/reviews-service";
 
 const HomeComponent = () => {
-    const [randomPark, setRandomPark] = useState(null);
-    const [randomImage, setRandomImage] = useState(null);
+    const { currentUser } = useSelector((state) => state.users);
+    const [review, setReviews] = useState();
+
+    useEffect(() => {
+        if (!currentUser) {
+            const fetchReviews = async () => {
+                const reviewsData = await findReviewsByPark('yell');
+                setReviews(reviewsData[0]);
+            };
+            fetchReviews().then(r => console.log(r));
+        }
+        else {
+            const fetchReviews = async () => {
+                const reviewsData = await findReviewsByUser(currentUser.username);
+                setReviews(reviewsData[0]);
+            };
+            fetchReviews().then(r => console.log(r));
+        }
+    }, []);
+
+    const renderContent = () => {
+        if (currentUser) {
+            return (
+                <div>
+                    <h3>Last Visited Park:</h3>
+                    <ParkReview review={review}/>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <h3>Random Review:</h3>
+                    <ParkReview review={review}/>
+                </div>
+            );
+        }
+    };
 
 
     return (
@@ -14,7 +51,6 @@ const HomeComponent = () => {
             <NavBar/>
             <div className={"row pt-5"}>
             <div className={"col-8 pt-2"}>
-
                 <div className={"row"}>
                     <RandomImage/>
                 </div>
@@ -24,7 +60,7 @@ const HomeComponent = () => {
             </div>
             <div className="col-4">
                 <div className="row">
-                    <h1>Welcome to our National Parks website!</h1>
+                    <h1>Welcome to our National Parks Website!</h1>
                     <h6>Explore the natural beauty of America's National Parks.</h6>
                 </div>
                 <hr></hr>
@@ -37,13 +73,7 @@ const HomeComponent = () => {
                 <div>
                     <hr></hr>
                     <div>
-                        // if logged in, show last visited park
-                        // if not logged in, show anonymized review
-                        <img
-                            src="https://via.placeholder.com/500x300"
-                            className="img-fluid"
-                            alt="Placeholder"
-                        />
+                        {renderContent()}
                     </div>
                 </div>
                 <div className="row mt-5">

@@ -1,16 +1,14 @@
 import NavBar from "../../components/nav-bar";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
 import {loginThunk} from "../../services/users/users-thunks";
 
 const LoginForm = () => {
 
-  const { currentUser, loading, error } = useSelector((state) => state.users);
+  const {loading, error } = useSelector((state) => state.users);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const login = () => {
     //alert("login!, user: " + username + ", pass: " + password);
     console.log("trying to login");
@@ -50,7 +48,7 @@ const LoginForm = () => {
           <div>
             <a className="text-warning mt-4 visually-hidden" href={`#`}>Forgot password?</a>
           </div>
-          <div>
+          <div className={"pt-3"}>
             <button onClick={login} className="btn btn-primary">
               Login
             </button>

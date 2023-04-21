@@ -1,27 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Link} from "react-router-dom";
 
 const SearchSidebar = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedKeywords, setSelectedKeywords] = useState([]);
+    const [selectedState, setSelectedState] = useState('AL');
+
     return(
         <div className="pt-3">
             <div className="form-group">
                 <label htmlFor="site-search">Search the site:</label>
                 <input type="search" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                        placeholder="" data-np-autofill-type="email"
-                       data-np-uid="1fced461-bf4c-42ef-bdcb-502ffbb7e276">
+                       data-np-uid="1fced461-bf4c-42ef-bdcb-502ffbb7e276"
+                       onChange={(e) => setSearchTerm(e.target.value)}>
                 </input>
             </div>
             <div className="form-group">
-                <label htmlFor="exampleSelect2" className="form-label mt-4">Keyword Search:</label>
-                <select multiple="yes" className="form-select" id="exampleSelect2">
-                    <option value="KEYWORD-1">KEYWORD-1</option>
-                    <option value="KEYWORD-2">KEYWORD-2</option>
-                    <option value="KEYWORD-3">KEYWORD-3</option>
-                    <option value="KEYWORD-4">KEYWORD-4</option>
+                <label htmlFor="exampleSelect2" className="form-label mt-4">Activity Search:</label>
+                <select multiple="yes" className="form-select" id="exampleSelect2"
+                        onChange={(e) => setSelectedKeywords(Array.from(e.target.selectedOptions, (option) => option.value))
+                }>
+                    <option value="KEYWORD-1">Hiking</option>
+                    <option value="KEYWORD-2">Kayaking</option>
+                    <option value="KEYWORD-3">Camping</option>
+                    <option value="KEYWORD-4">Tours</option>
                 </select>
             </div>
             <div className="form-group">
                 <label htmlFor="exampleSelect2" className="form-label mt-4">State Search:</label>
-                <select className="form-select" id="exampleSelect2">
+                <select className="form-select" id="exampleSelect2" onChange={(e) => setSelectedState(e.target.value)}>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -78,9 +86,10 @@ const SearchSidebar = () => {
             </div>
             <br/>
             <div className="pt-2 ">
-                <button className={"btn btn-primary"}>Search</button>
+                <Link to={"/results/" + searchTerm + "/" + selectedKeywords + "/" + selectedState}>
+                    <button className={"btn btn-primary"}>Search</button>
+                </Link>
             </div>
-
         </div>
             );
 }
