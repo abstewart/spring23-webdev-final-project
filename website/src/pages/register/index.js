@@ -64,7 +64,7 @@ const Register = () => {
                   </div>
               </div>
               <div className={"form-group"}>
-                  <div className={"row pt-3"}>
+                  <div className={"row pt-3 pb-3"}>
                       <div className="col-6">
                           <div className="form-floating">
                               <input id="register_password_1" type="password" className="form-control"/>

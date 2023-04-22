@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import {createReviewLike, findWhoLikedReview, numLikesForReview} from "../../services/reviewLikes/reviewLikes-service";
+import {
+    createReviewLike,
+    deleteReviewLike,
+    findWhoLikedReview,
+    numLikesForReview
+} from "../../services/reviewLikes/reviewLikes-service";
 import {useSelector} from "react-redux";
 
 
 const ParkReview = (
     {
         review = {
-            id: "0",
+            _id: "0",
             parkId: "N/A",
             summary: "This is a summary",
             message: "This is a message",
@@ -41,9 +46,9 @@ const ParkReview = (
     function handleLike() {
         console.log("Like this review");
         const likeReview = async (review) => {
-            const resp = await createReviewLike(review.id, currentUser.username);
+            const resp = await createReviewLike(review._id);
             console.log(resp)
-            //setNumLikes(resp);
+            setNumLikes(resp);
         };
         likeReview(review).then(r => console.log(r));
 
@@ -51,6 +56,13 @@ const ParkReview = (
 
     function handleUnlike() {
         console.log("Unlike this review");
+
+        const unlikeReview = async (review) => {
+            const resp = await deleteReviewLike(review._id);
+            console.log(resp)
+            setNumLikes(resp);
+        };
+        unlikeReview(review).then(r => console.log(r));
     }
 
     function likeorUnlike() {

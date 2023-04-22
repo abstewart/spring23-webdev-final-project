@@ -38,7 +38,7 @@ function ReviewForm({ parkCode }) {
     }
 
     return (
-        <div className="form-group text-center">
+        <div className="form-group text-center ">
         <form onSubmit={handleSubmit} className={"form-control"}>
             <h2>Add a Review</h2>
             <div className="form-group">

@@ -28,7 +28,9 @@ export const numLikesByUser = async () => {
   return response.data;
 };
 export const createReviewLike = async (reviewId) => {
+  console.log("createReviewLike: ", reviewId)
   const response = await api.post(`${REVIEW_LIKES_API}/${reviewId}`);
+  console.log("createReviewLike response: ", response.data)
   return response.data;
 };
 export const deleteReviewLike = async (reviewLikeId) => {
