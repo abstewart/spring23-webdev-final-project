@@ -1,7 +1,8 @@
 import NavBar from "../../components/nav-bar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../services/users/users-thunks";
+import {clearErrLoad} from "../../redux/users-reducer";
 
 const LoginForm = () => {
 
@@ -18,6 +19,8 @@ const LoginForm = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {dispatch(clearErrLoad())}, [])
 
   return (
       <div className="container">

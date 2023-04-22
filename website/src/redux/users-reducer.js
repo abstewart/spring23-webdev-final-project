@@ -22,7 +22,17 @@ const initialState = {
 const usersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    clearErrLoad: (state) => {
+      console.log("clearErrLoad");
+      state.loading = false;
+      state.error = null;
+    },
+    setError: (state, action) => {
+      console.log("serror called");
+      state.error = action.payload;
+    }
+  },
   extraReducers: {
     [updateUserThunk.fulfilled]: (state, action) => {
       state.users = state.users.map((user) =>
@@ -69,8 +79,17 @@ const usersSlice = createSlice({
     [logoutThunk.fulfilled]: (state, action) => {
       state.currentUser = null;
     },
+    [registerThunk.pending]: (state, action) => {
+      state.loading = true;
+      state.error = null;
+    },
     [registerThunk.fulfilled]: (state, action) => {
+      state.loading = false;
       state.currentUser = action.payload;
+    },
+    [registerThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
     },
     [profileThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
@@ -78,4 +97,5 @@ const usersSlice = createSlice({
   },
 });
 export default usersSlice.reducer;
+export const {clearErrLoad, setError} = usersSlice.actions;
 
