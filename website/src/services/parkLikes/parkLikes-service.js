@@ -11,8 +11,9 @@ export const findAllParkLikes = async () => {
   const response = await axios.get(PARK_LIKES_API);
   return response.data
 };
-export const findParksLikedByUser = async (username) => {
-  const response = await axios.get(`${PARK_LIKES_API}/byUser/${username}`);
+//uses session to identify username
+export const findParksLikedByUser = async () => {
+  const response = await api.get(`${PARK_LIKES_API}/byUser`);
   return response.data
 };
 export const findWhoLikedPark = async (parkId) => {
@@ -23,8 +24,9 @@ export const numLikesForPark = async (parkId) => {
   const response = await axios.get(`${PARK_LIKES_API}/numLikedPark/${parkId}`);
   return response.data
 };
-export const numParkLikesForUser = async (username) => {
-  const response = await axios.get(`${PARK_LIKES_API}/numLikedUsername/${username}`);
+//gets username via session
+export const numParkLikesForUser = async () => {
+  const response = await api.get(`${PARK_LIKES_API}/numUserLiked`);
   return response.data
 };
 
@@ -33,14 +35,15 @@ export const deleteParkLike = async (parkLikeId) => {
   const response = await api.delete(`${PARK_LIKES_API}/${parkLikeId}`);
   return response.data;
 };
-export const deleteParkLikeByParams = async (parkId, username) => {
-  const response = await api.delete(`${PARK_LIKES_API}/${username}/${parkId}`);
+//gets username via session
+export const deleteParkLikeByParams = async (parkId) => {
+  const response = await api.delete(`${PARK_LIKES_API}/parkId/${parkId}`);
   return response.data;
 };
 
 //creating
-export const createParkLike = async (parkId, username) => {
-  const pl = {username, park: parkId}
-  const response = await axios.post(PARK_LIKES_API, pl);
+//get username from session
+export const createParkLike = async (parkId) => {
+  const response = await api.post(`${PARK_LIKES_API}/${parkId}`);
   return response.data;
 };
