@@ -1,11 +1,25 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk} from "../../services/users/users-thunks";
+import {useState} from "react";
 
 const NavBar = ({active = null}) => {
 
   const { currentUser } = useSelector((state) => state.users);
+  const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
+  let navigate = useNavigate();
+
+  function refreshPage(){
+    window.location.reload();
+  }
+
+  function handleSearch() {
+    //navigate to /search/searchTerm
+    navigate(`/search/${searchTerm}//`);
+    refreshPage();
+  }
+
   return(
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -56,9 +70,9 @@ const NavBar = ({active = null}) => {
                       Logout
                     </button>}
                 <input className="form-control me-sm-2" type="text"
-                       placeholder="Search"/>
+                       placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}/>
                 <button className="btn btn-secondary my-2 my-sm-0"
-                        type="button">Search
+                        type="button" onClick={handleSearch}>Search
                 </button>
               </div>
             </div>

@@ -7,13 +7,25 @@ import {useParams} from "react-router";
 
 
 const SearchResults = () => {
-    const {val} = useParams();
-    const {keywords} = useParams();
-    const {state} = useParams();
+    let {val} = useParams();
+    let {keywords} = useParams();
+    let {state} = useParams();
     const [parks, setParks] = useState([]);
 
     useEffect(() => {
+        if (state === undefined) {
+            state = "";
+        }
+        if (keywords === undefined) {
+            keywords = "";
+        }
+        if (val === undefined) {
+            val = "";
+        }
         const fetchParks = async () => {
+            console.log("state: " + state);
+            console.log("val: " + val);
+            console.log("keywords: " + keywords);
             const parksData = await generalParkSearch({state: state,term: val + " " + keywords});
             setParks(parksData);
         };
@@ -31,12 +43,12 @@ const SearchResults = () => {
     return (
         <>
             <NavBar active="search"/>
-            <div className={"row pt-5"}>
-                <div className={"col-4"}>
+            <div className={"row"}>
+                <div className={"col-md-4 col-sm-12 pt-5"}>
                     <h3>Not what you were looking for?</h3>
                     <SearchSidebar/>
                 </div>
-                <div className={"col-8"}>
+                <div className={"col-md-8 col-sm-12 pt-5 pb-5"}>
                     <ul className="list-group list-group-flush">
                         {allParks()}
                     </ul>

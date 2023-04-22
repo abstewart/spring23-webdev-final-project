@@ -20,8 +20,9 @@ export const SearchParkDetailsCard = (
         return <div>Loading...</div>;
     }
 
+
     return (
-        <div className="card text-white bg-primary mb-3" style={{ maxWidth: "20rem" }}>
+        <div className="card text-white bg-primary mb-3">
             <div className="card-header">
                 <img src={park.images?.[0]?.url} className="d-block w-100" alt={park.images?.[0]?.altText} />
             </div>

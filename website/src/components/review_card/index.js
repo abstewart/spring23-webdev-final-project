@@ -16,7 +16,6 @@ const ParkReview = (
         }
     }
 ) => {
-    console.log(review);
     return (
         <div className="card mb-3">
             <h3 className="card-header"><Link to={"/details/" + review.parkId}>{review.parkId}</Link></h3>

@@ -6,6 +6,12 @@ const api = axios.create({
   withCredentials: true,
 });
 
+export const findMostRecentReview = async () => {
+    const response = await api.get(`${REVIEWS_API}/recent`);
+    console.log(response.data);
+    return response.data;
+};
+
 export const findAllReviews = async () => {
   const response = await api.get(REVIEWS_API);
   return response.data;

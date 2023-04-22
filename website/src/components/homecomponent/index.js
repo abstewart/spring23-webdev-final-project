@@ -4,7 +4,7 @@ import NavBar from "../nav-bar";
 import RandomImage from "../random_park_image";
 import {useSelector} from "react-redux";
 import ParkReview from "../review_card";
-import {findReviewsByPark, findReviewsByUser} from "../../services/reviews/reviews-service";
+import {findMostRecentReview, findReviewsByUser} from "../../services/reviews/reviews-service";
 
 const HomeComponent = () => {
     const { currentUser } = useSelector((state) => state.users);
@@ -13,8 +13,8 @@ const HomeComponent = () => {
     useEffect(() => {
         if (!currentUser) {
             const fetchReviews = async () => {
-                const reviewsData = await findReviewsByPark('yell');
-                setReviews(reviewsData[0]);
+                const reviewsData = await findMostRecentReview();
+                setReviews(reviewsData);
             };
             fetchReviews().then(r => console.log(r));
         }
@@ -38,7 +38,7 @@ const HomeComponent = () => {
         } else {
             return (
                 <div>
-                    <h3>Random Review:</h3>
+                    <h3>Most Recent Review:</h3>
                     <ParkReview review={review}/>
                 </div>
             );
@@ -50,7 +50,7 @@ const HomeComponent = () => {
         <div className={"container text-center"}>
             <NavBar/>
             <div className={"row pt-5"}>
-            <div className={"col-8 pt-2"}>
+            <div className={"col-lg-8 col-sm-12 pt-2 "}>
                 <div className={"row"}>
                     <RandomImage/>
                 </div>
@@ -58,8 +58,8 @@ const HomeComponent = () => {
                     <RandomImage/>
                 </div>
             </div>
-            <div className="col-4">
-                <div className="row">
+            <div className="col-lg-4 col-m-2">
+                <div className="row pt-2">
                     <h1>Welcome to our National Parks Website!</h1>
                     <h6>Explore the natural beauty of America's National Parks.</h6>
                 </div>

@@ -10,6 +10,7 @@ export const getParkDetails = async (parkId) => {
 }
 
 export const generalParkSearch = async ({state, term}) => {
+  console.log("generalParkSearch: ", state, term)
   const response = await axios.get(`${NPS_API}/search?stateCode=${state}&searchTerm=${term}`)
   console.log(response.data.data);
   return response.data.data;

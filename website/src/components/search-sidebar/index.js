@@ -1,12 +1,38 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+
 
 const SearchSidebar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedState, setSelectedState] = useState('AL');
+    let navigate = useNavigate();
+
     function refreshPage(){
         window.location.reload();
+    }
+
+    function handleSubmit() {
+        navigate(createLink());
+        refreshPage();
+    }
+
+    function handleSelectKeyword(e) {
+        setSelectedKeywords(Array.from(e.target.selectedOptions, (option) => option.value));
+    }
+
+    function createLink() {
+        let link = "/search/";
+        link += searchTerm;
+        link += "/";
+        selectedKeywords.forEach((keyword) => {
+            link += keyword;
+            link += "-";
+        });
+        link += "/";
+        link += selectedState;
+        console.log(link)
+        return link;
     }
 
     return(
@@ -22,12 +48,11 @@ const SearchSidebar = () => {
             <div className="form-group">
                 <label htmlFor="exampleSelect2" className="form-label mt-4">Activity Search:</label>
                 <select multiple="yes" className="form-select" id="exampleSelect2"
-                        onChange={(e) => setSelectedKeywords(Array.from(e.target.selectedOptions, (option) => option.value))
-                }>
-                    <option value="KEYWORD-1">Hiking</option>
-                    <option value="KEYWORD-2">Kayaking</option>
-                    <option value="KEYWORD-3">Camping</option>
-                    <option value="KEYWORD-4">Tours</option>
+                        onChange={(e) => handleSelectKeyword(e)}>
+                    <option value="Hiking">Hiking</option>
+                    <option value="Kayaking">Kayaking</option>
+                    <option value="Camping">Camping</option>
+                    <option value="Tours">Tours</option>
                 </select>
             </div>
             <div className="form-group">
@@ -89,9 +114,7 @@ const SearchSidebar = () => {
             </div>
             <br/>
             <div className="pt-2 ">
-                <Link to={"/results/" + searchTerm + "/" + selectedKeywords + "/" + selectedState}>
-                    <button className={"btn btn-primary"} onClick={refreshPage}>Search</button>
-                </Link>
+                <button className={"btn btn-primary"} onClick={handleSubmit}>Search</button>
             </div>
         </div>
             );

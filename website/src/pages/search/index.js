@@ -1,12 +1,8 @@
 import React from "react";
 import SearchSidebar from "../../components/search-sidebar";
 import NavBar from "../../components/nav-bar";
-function refreshPage(){
-    window.location.reload();
-}
 
 const Search = () => {
-    refreshPage();
     return (
         <>
             <NavBar active="search"/>
