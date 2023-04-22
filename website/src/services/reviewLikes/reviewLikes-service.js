@@ -29,10 +29,14 @@ export const numLikesByUser = async (username) => {
 };
 export const createReviewLike = async (reviewId, username) => {
   const rl = {review: reviewId, username}
-  const response = axios.create(REVIEW_LIKES_API, rl);
+  const response = await axios.post(REVIEW_LIKES_API, rl);
   return response.data;
 };
 export const deleteReviewLike = async (reviewLikeId) => {
-  const response = await api.delete(`${REVIEWS_LIKES_API}/${reviewLikeId}`);
+  const response = await api.delete(`${REVIEW_LIKES_API}/${reviewLikeId}`);
+  return response.data;
+};
+export const deleteReviewLikeByParams = async (review, username) => {
+  const response = await api.delete(`${REVIEW_LIKES_API}/${username}/${review}`);
   return response.data;
 };
