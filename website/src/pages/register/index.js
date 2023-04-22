@@ -1,14 +1,20 @@
 import NavBar from "../../components/nav-bar";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "../../services/users/users-thunks";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {clearErrLoad, setError} from "../../redux/users-reducer";
 
 //lots of examples here https://bootswatch.com/slate/
 
 const Register = () => {
     const {loading, error} = useSelector((state) => state.users);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [rUser, setRUser] = useState({});
+
+    //clear any error message from other screens
+    useEffect(() => {dispatch(clearErrLoad())}, [])
     const handlePasswordToggle = () => {
         const passwordInput = document.getElementById("register_password_1");
         const passwordInput2 = document.getElementById("register_password_2");
@@ -21,15 +27,32 @@ const Register = () => {
         }
     }
 
-    const tryRegister = () => {
+    const tryRegister = async () => {
         console.log("trying to register");
-        //todo validate fields?
-        try {
-            dispatch(registerThunk({rUser}));
-            //todo navigate to profile screen
-        } catch (err) {
-            console.log(err);
+        //validate fields
+
+        if(rUser.pass1 !== rUser.pass2){
+            console.log("setting error");
+            dispatch(setError("Passwords must match!"));
+            return;
         }
+        //construct user to try
+        const tUser = {
+            first_name : rUser.fname,
+            last_name : rUser.lname,
+            email : rUser.email,
+            username : rUser.username,
+            password : rUser.pass1,
+        }
+
+        try{
+            await dispatch(registerThunk(tUser)).unwrap();
+        } catch (err) {
+            console.log("ERROR!");
+            console.log(err.message)
+            return;
+        }
+        navigate("/profile");
     };
 
 
@@ -42,24 +65,32 @@ const Register = () => {
               <div className={"form-group"}>
                   <div className={"row pt-3"}>
                       <div className="form-floating col-6">
-                          <input id="register_first_name" type="text" className="form-control"/>
+                          <input id="register_first_name" type="text" className="form-control"
+                                 onChange={(e) => {
+                                     setRUser({...rUser, fname: e.target.value})}}/>
                           <label className={`text-dark`} htmlFor={`register_first_name`}>First Name</label>
                       </div>
                       <div className="form-floating col-6">
-                          <input id="register_last_name" type="text" className="form-control"/>
+                          <input id="register_last_name" type="text" className="form-control"
+                                 onChange={(e) => {
+                                     setRUser({...rUser, lname: e.target.value})}}/>
                           <label className={`text-dark`} htmlFor={`register_last_name`}>Last Name</label>
                       </div>
                   </div>
               </div>
               <div className={"row pt-3"}>
                   <div className="form-floating">
-                      <input id="register_email" type="text" className="form-control"/>
+                      <input id="register_email" type="text" className="form-control"
+                             onChange={(e) => {
+                                 setRUser({...rUser, email: e.target.value})}}/>
                       <label className={`text-dark`} htmlFor={`register_email`}>Email</label>
                   </div>
               </div>
               <div className={"row pt-3"}>
                   <div className="form-floating">
-                      <input id="register_username" type="text" className="form-control"/>
+                      <input id="register_username" type="text" className="form-control"
+                             onChange={(e) => {
+                                 setRUser({...rUser, username: e.target.value})}}/>
                       <label className={`text-dark`} htmlFor={`register_username`}>Username</label>
                   </div>
               </div>
@@ -67,7 +98,9 @@ const Register = () => {
                   <div className={"row pt-3 pb-3"}>
                       <div className="col-6">
                           <div className="form-floating">
-                              <input id="register_password_1" type="password" className="form-control"/>
+                              <input id="register_password_1" type="password" className="form-control"
+                                     onChange={(e) => {
+                                         setRUser({...rUser, pass1: e.target.value})}}/>
                               <label className={`text-dark`} htmlFor={`register_password_1`}>Password</label>
                           </div>
                           {/*<div className={`text-info`}>Password must be 8-32 characters in length, include 1 number, and one of ['!@#$%&*]</div>*/}
@@ -77,7 +110,9 @@ const Register = () => {
                           </div>
                       </div>
                       <div className="form-floating col-6">
-                          <input id="register_password_2" type="password" className="form-control"/>
+                          <input id="register_password_2" type="password" className="form-control"
+                                 onChange={(e) => {
+                                     setRUser({...rUser, pass2: e.target.value})}}/>
                           <label className={`text-dark`} htmlFor={`register_password_2`}>Repeat Password</label>
                       </div>
                   </div>
@@ -89,7 +124,7 @@ const Register = () => {
                   {loading && <span>Loading</span>}
               </div>
               <div className={"row"}>
-                  {error && <span>{error}</span>}
+                  {error && <span className="text-danger display-6"> {error} </span>}
               </div>
 
 

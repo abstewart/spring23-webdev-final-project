@@ -1,7 +1,9 @@
 import NavBar from "../../components/nav-bar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../services/users/users-thunks";
+import {clearErrLoad} from "../../redux/users-reducer";
+import {useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
 
@@ -9,15 +11,20 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const login = () => {
+  const navigate = useNavigate();
+  const login = async () => {
     //alert("login!, user: " + username + ", pass: " + password);
     console.log("trying to login");
     try {
-      dispatch(loginThunk({username, password}));
+      await dispatch(loginThunk({username, password})).unwrap();
     } catch (err) {
       console.log(err);
+      return;
     }
+    navigate("/profile");
   };
+
+  useEffect(() => {dispatch(clearErrLoad())}, [])
 
   return (
       <div className="container">
