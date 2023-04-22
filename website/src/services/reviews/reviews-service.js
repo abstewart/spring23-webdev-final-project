@@ -8,7 +8,7 @@ const api = axios.create({
 
 export const findMostRecentReview = async () => {
     const response = await api.get(`${REVIEWS_API}/recent`);
-    console.log(response.data);
+    //console.log(response.data);
     return response.data;
 };
 

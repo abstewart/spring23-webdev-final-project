@@ -17,6 +17,7 @@ export const findReviewsLikedByUser = async (username) => {
 };
 export const findWhoLikedReview = async (reviewId) => {
   const response = await axios.get(`${REVIEW_LIKES_API}/whoLiked/${reviewId}`);
+  console.log(response.data)
   return response.data;
 };
 export const numLikesForReview = async (reviewId) => {
@@ -30,9 +31,10 @@ export const numLikesByUser = async (username) => {
 export const createReviewLike = async (reviewId, username) => {
   const rl = {review: reviewId, username}
   const response = axios.create(REVIEW_LIKES_API, rl);
+  console.log(response.data)
   return response.data;
 };
 export const deleteReviewLike = async (reviewLikeId) => {
-  const response = await api.delete(`${REVIEWS_LIKES_API}/${reviewLikeId}`);
+  const response = await api.delete(`${REVIEW_LIKES_API}/${reviewLikeId}`);
   return response.data;
 };
