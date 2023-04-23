@@ -27,7 +27,7 @@ const SearchSidebar = () => {
             setSelectedKeywords(keywords.keywords.split("-"));
         }
 
-        if (state.state === undefined) {
+        if (state.state === undefined || isNaN(state.state)) {
             setSelectedState('None');
         }
         else {
@@ -48,14 +48,25 @@ const SearchSidebar = () => {
 
     function createLink() {
         let link = "/search/";
-        link += searchTerm;
-        link += "/";
-        selectedKeywords.forEach((keyword) => {
-            link += keyword;
-            link += "-";
-        });
-        link += "/";
-        link += selectedState;
+        if (searchTerm !== "") {
+            link += searchTerm;
+            link += "/";
+        }
+
+        if (selectedKeywords.length !== 0) {
+            selectedKeywords.forEach((keyword) => {
+                link += keyword;
+                link += "-";
+            });
+            link = link.substring(0, link.length - 1);
+            link += "/";
+        }
+
+        if (selectedState !== "None") {
+            link += selectedState;
+            link += "/";
+        }
+
         console.log(link)
         return link;
     }
@@ -65,8 +76,9 @@ const SearchSidebar = () => {
             <div className="form-group">
                 <label htmlFor="site-search">Search the site:</label>
                 <input type="search" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                       placeholder={searchTerm} data-np-autofill-type="email"
+                       placeholder="" data-np-autofill-type="email"
                        data-np-uid="1fced461-bf4c-42ef-bdcb-502ffbb7e276"
+                       value={searchTerm}
                        onChange={(e) => setSearchTerm(e.target.value)}>
                 </input>
             </div>

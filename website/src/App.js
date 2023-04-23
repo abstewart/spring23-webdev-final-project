@@ -14,7 +14,6 @@ import { Provider } from "react-redux";
 import CurrentUserContext from "./redux/current-user-context";
 import ParkDetails from "./components/park-details";
 import SearchResults from "./pages/search-results";
-import MyProfile from "./pages/my-profile";
 
 function App() {
   return (
@@ -26,7 +25,7 @@ function App() {
                 <Route index element={<Home/>}/>
                 <Route path={`/home`} element={<Home/>}/>
                 <Route path={`/search`} element={<Search/>}/>
-                <Route path={`/search/:val?/:keywords?/:state?/`} element={<SearchResults/>}/>
+                <Route path={`/search/:val?/:keywords?/:state?`} element={<SearchResults/>}/>
                 <Route path={`/profile`} element={<Profile/>}/>
                 <Route path={`/profile/:uid`} element={<Profile/>}/>
                 <Route path={`/login`} element={<Login/>}/>
