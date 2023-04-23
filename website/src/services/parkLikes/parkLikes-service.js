@@ -32,6 +32,7 @@ export const numParkLikesForUser = async () => {
 
 //deleting
 export const deleteParkLike = async (parkLikeId) => {
+  console.log("deleteParkLike called");
   const response = await api.delete(`${PARK_LIKES_API}/${parkLikeId}`);
   return response.data;
 };
