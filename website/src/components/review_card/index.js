@@ -76,31 +76,32 @@ const ParkReview = (
         //if the user has already liked this review return a button that says "Unlike"
         //else return a button that says "Like"
         if (!whoLiked.includes(currentUser.username)) {
-            return <div className={"container pt-1"}><button type={"button"} className={"btn btn-primary"} onClick={handleLike}>Like this Review</button></div>;
+            return <div className={"container pt-2"}><button type={"button"} className={"btn btn-secondary btn-like"} onClick={handleLike}>Like this Review</button></div>;
         }
         else {
-            return <div className={"container pt-1"}><button type={"button"} className={"btn btn-primary"} onClick={handleUnlike}>Unlike this Review</button></div>;
+            return <div className={"container pt-2"}><button type={"button"} className={"btn btn-secondary btn-like"} onClick={handleUnlike}>Unlike this Review</button></div>;
         }
     }
 
     if (currentUser) {
 
         return (
-            <div className={"container"}>
+            <div className={""}>
                 <div className="card">
                     <a href={"/details/" + review.parkId} className="btn btn-primary stretched-link"><h3>{review.parkId}</h3></a>
                     <div className="card-body">
                         <h5 className="card-title">{review.summary}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">Author: {review.author}</h6>
+                        <a href={"/profile/" + review.author} className={"author-link"}><h5 className="card-subtitle mb-2 text-muted">Author: {review.author}</h5></a>
                         <p className="card-text">{review.message}</p>
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item">Rating: {review.rating}/10</li>
                             <li className="list-group-item">Likes: {numLikes}</li>
                             <li className="list-group-item">Created: {new Date(review.creation_date).toDateString()}</li>
                         </ul>
+                        {likeorUnlike()}
                     </div>
                 </div>
-                {likeorUnlike()}
+
             </div>
         );
     }

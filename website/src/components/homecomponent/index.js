@@ -39,7 +39,8 @@ const HomeComponent = () => {
         else if (currentUser) {
             return (
                 <div>
-                    <h3>Last Visited Park:</h3>
+                    <h3>Hi, {currentUser.first_name}!</h3>
+                    <h3>Take a look at the last park you reviewed:</h3>
                     <ParkReview review={review}/>
                 </div>
             );
@@ -64,15 +65,17 @@ const HomeComponent = () => {
             </div>
             <div className="col-lg-4 col-m-2">
                 <div className="row pt-2">
-                    <h1>Welcome to our National Parks Website!</h1>
-                    <h6>Explore the natural beauty of America's National Parks.</h6>
+                    <h1>Welcome to the National Parks Explorer!</h1>
+                    <h6>Explore the natural beauty of America's National Parks and Monuments.</h6>
                 </div>
                 <hr></hr>
                 <div className="row">
                     <h3>Looking for something?</h3>
-                    <Link to="/search" className="btn btn-primary">
-                        Search for a Park
-                    </Link>
+                    <div className={"container"}>
+                        <Link to="/search" className="btn btn-primary">
+                            Search for a Park
+                        </Link>
+                    </div>
                 </div>
                 <div>
                     <hr></hr>
@@ -80,16 +83,19 @@ const HomeComponent = () => {
                         {renderContent()}
                     </div>
                 </div>
-                <div className="row mt-5">
-                    <div className="col-6">
-                        <Link to="/register" className="btn btn-secondary">
-                            Join us!
-                        </Link>
-                    </div>
-                    <div className="col-6">
-                        <Link to="/login" className="btn btn-secondary">
-                            Log In
-                        </Link>
+                <div className={"container"}>
+                    <div className="row mt-5 p-2 bg-primary rounded">
+                        <h3 className={"text-light pb-2"}>Interested in joining our community?</h3>
+                        <div className="col-6">
+                            <Link to="/register" className="btn btn-secondary">
+                                Join us!
+                            </Link>
+                        </div>
+                        <div className="col-6">
+                            <Link to="/login" className="btn btn-secondary">
+                                Log In
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

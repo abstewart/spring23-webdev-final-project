@@ -1,20 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {useParams} from "react-router";
 
 
 const SearchSidebar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedKeywords, setSelectedKeywords] = useState([]);
-    const [selectedState, setSelectedState] = useState('AL');
+    const [selectedState, setSelectedState] = useState('None');
+
+    const val = useParams();
+    const keywords = useParams();
+    const state = useParams();
+
+    useEffect(() => {
+        if (val.val === undefined) {
+            setSearchTerm('');
+        }
+        else {
+            setSearchTerm(val.val);
+        }
+
+        if (keywords.keywords === undefined) {
+            setSelectedKeywords([]);
+        }
+        else {
+            setSelectedKeywords(keywords.keywords.split("-"));
+        }
+
+        if (state.state === undefined) {
+            setSelectedState('None');
+        }
+        else {
+            setSelectedState(state.state);
+        }
+    }, []);
+
+
     let navigate = useNavigate();
-
-    function refreshPage(){
-        window.location.reload();
-    }
-
     function handleSubmit() {
         navigate(createLink());
-        refreshPage();
+        window.location.reload();
     }
 
     function handleSelectKeyword(e) {
@@ -40,7 +65,7 @@ const SearchSidebar = () => {
             <div className="form-group">
                 <label htmlFor="site-search">Search the site:</label>
                 <input type="search" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                       placeholder="" data-np-autofill-type="email"
+                       placeholder={searchTerm} data-np-autofill-type="email"
                        data-np-uid="1fced461-bf4c-42ef-bdcb-502ffbb7e276"
                        onChange={(e) => setSearchTerm(e.target.value)}>
                 </input>
@@ -58,6 +83,7 @@ const SearchSidebar = () => {
             <div className="form-group">
                 <label htmlFor="exampleSelect2" className="form-label mt-4">State Search:</label>
                 <select className="form-select" id="exampleSelect2" onChange={(e) => setSelectedState(e.target.value)}>
+                    <option value="NONE">None</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -113,8 +139,8 @@ const SearchSidebar = () => {
                 </select>
             </div>
             <br/>
-            <div className="pt-2 ">
-                <button className={"btn btn-primary"} onClick={handleSubmit}>Search</button>
+            <div className="pt-2">
+                <button className={"btn btn-primary w-100"} onClick={handleSubmit}>Search</button>
             </div>
         </div>
             );

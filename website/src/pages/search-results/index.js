@@ -34,9 +34,7 @@ const SearchResults = () => {
 
     const allParks = () => {
         return parks.map((park) => (
-            <li className="list-group-item" key={park.id}>
-                <SearchParkDetailsCard parkCode={park.parkCode}/>
-            </li>
+            <SearchParkDetailsCard parkCode={park.parkCode}/>
         ));
     }
 
@@ -44,8 +42,7 @@ const SearchResults = () => {
         <>
             <NavBar active="search"/>
             <div className={"row"}>
-                <div className={"col-md-4 col-sm-12 pt-5"}>
-                    <h3>Not what you were looking for?</h3>
+                <div className={"container col-md-4 col-sm-12 pt-5 mw-100"}>
                     <SearchSidebar/>
                 </div>
                 <div className={"col-md-8 col-sm-12 pt-5 pb-5"}>

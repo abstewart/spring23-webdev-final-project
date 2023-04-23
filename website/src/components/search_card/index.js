@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {getParkDetails} from "../../services/nps/nps-service";
-import {Link} from "react-router-dom";
 
 export const SearchParkDetailsCard = (
     {
@@ -23,11 +22,11 @@ export const SearchParkDetailsCard = (
 
     return (
         <div className="card text-white bg-primary mb-3">
+            <a href={"/details/" + parkCode} className={"btn btn-primary stretched-link"}> <h3 className={"text-center"}>{park.name}</h3></a>
             <div className="card-header">
-                <img src={park.images?.[0]?.url} className="d-block w-100" alt={park.images?.[0]?.altText} />
+                <img src={park.images?.[0]?.url} className="img-fluid d-block w-100 rounded mt-2" alt={park.images?.[0]?.altText} />
             </div>
             <div className="card-body">
-                <Link to={"/details/" + parkCode}><h4>{park.name}</h4></Link>
                 <p className="card-text">{park.description}</p>
             </div>
         </div>

@@ -1,7 +1,7 @@
 :root {
   /*--bs-body-bg: #272b30;*/
   /*--bs-body-bg: #5C4033;*/
-  --bs-body-bg: #6B4423;
+  --bs-body-bg: #573518;
   --bs-body-bg-rgb: 107, 68, 35;
   /*--bs-body-bg: #483C32;*/
 
@@ -13,11 +13,21 @@
 }
 
 .form-control{
-  color: #272b30;
-  background-color: #e1e1e1;
+  color: #e1e1e1;
+  background-color: #726c6c;
+  border-color: #272b30;
+  --bs-highlight-bg: #272b30;
 }
+
+.form-select{
+  color: #e1e1e1;
+  background-color: #726c6c;
+  border-color: #272b30;
+  --bs-highlight-bg: #272b30;
+}
+
 .img-fluid{
-  border: 3px solid #272b30;
+  border: 2px solid #272b30;
   padding: 0;
 }
 .btn-primary {
@@ -29,4 +39,21 @@
   color: #e1e1e1;
   border-color: #272b30;
   border-width: 1px;
+}
+.card .btn-like {
+  z-index: 1;
+  position: relative;
+}
+.card .author-link {
+  z-index: 1;
+  position: relative;
+  text-decoration: wavy underline;
+}
+.d-flex {
+  gap: 10px;
+}
+.card {
+  border-width: 3px;
+  border-color: #272b30;
+  border-style: double;
 }

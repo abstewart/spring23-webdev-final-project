@@ -24,7 +24,7 @@ const NavBar = ({active = null}) => {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <div className="container-fluid">
-            <Link className="navbar-brand" to="/home">Website!</Link>
+            <Link className="navbar-brand" to="/home">National Parks!</Link>
             <div className="collapse navbar-collapse" id="navbarColor01">
               <ul className="navbar-nav me-auto">
                 <li className="nav-item">
@@ -63,7 +63,7 @@ const NavBar = ({active = null}) => {
                 {/*  </div>*/}
                 {/*</li>*/}
               </ul>
-              <div className="d-flex">
+              <div className="d-flex p-1">
                 {currentUser &&
                     <button onClick={() => dispatch(logoutThunk())}
                     className="btn btn-warning">
