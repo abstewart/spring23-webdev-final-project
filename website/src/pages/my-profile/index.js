@@ -19,9 +19,6 @@ const MyProfile = () => {
         <div className={`container`}>
           <NavBar active={`profile`}/>
           <MPDetails/>
-          <div>Visited Parks</div>
-          <div>Park reviews</div>
-          <div>Planned trips?</div>
         </div>
       </>
   );

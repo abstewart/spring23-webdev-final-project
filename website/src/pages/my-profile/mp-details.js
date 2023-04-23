@@ -149,14 +149,13 @@ const MPDetails = () => {
         <button type="button" onClick={tryUpdate} className={"btn btn-primary"}>
           Update Profile
         </button>
+          <a href={"/profile/" + currentUser.username}> <button type="button" className={"btn btn-primary"}> See Public Profile </button> </a>
         <div className={"row"}>
           {loading && <span>Loading</span>}
         </div>
         <div className={"row"}>
           {error && <span className="text-danger display-6"> {error} </span>}
         </div>
-
-
       </div>
   );
 }
