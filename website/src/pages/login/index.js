@@ -40,7 +40,7 @@ const LoginForm = () => {
             <label className={`wd-text-dark`} htmlFor={`login_username`}>Username</label>
           </div>
           <div className="form-floating mt-2">
-            <input id="login_password" type="text" className="form-control"
+            <input id="login_password" type="password" className="form-control"
                    onChange={(e) => {setPassword(e.target.value)}}/>
             <label className={`wd-text-dark`} htmlFor={`login_password`}>Password</label>
           </div>
