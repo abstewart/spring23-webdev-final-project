@@ -65,14 +65,14 @@ const MPDetails = () => {
     console.log(settingUser);
 
     try {
-      await dispatch(updateUserThunk({user: settingUser, userId: currentUser._id})).unwrap();
+      await dispatch(updateUserThunk(settingUser)).unwrap();
     } catch (err) {
       console.log("ERROR!");
       console.log(err.message);
     }
 
     //clear the error message
-    //dispatch(clearErrLoad())
+
   }
 
 

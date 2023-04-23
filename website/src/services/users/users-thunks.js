@@ -26,9 +26,9 @@ export const createUserThunk = createAsyncThunk(
 
 export const updateUserThunk = createAsyncThunk(
     "users/update",
-    async (obj) => {
-      await userService.updateUser(obj.user, obj.userId);
-      return obj.user;
+    async (user) => {
+      await userService.updateUser(user);
+      return user;
     }
 );
 
