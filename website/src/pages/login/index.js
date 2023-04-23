@@ -34,28 +34,15 @@ const LoginForm = () => {
           <span className={`pe-2`}>No account?</span><Link to={"/register"}>Register</Link>
         </h4>
         <div>
-          <div className="form-group">
-            <label className="form-label text-light" htmlFor="login_username">Username</label>
-            <input
-                className="form-control"
-                id="login_username"
-                type="text"
-                placeholder="username"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-            />
+          <div className="form-floating mt-2">
+            <input id="login_username" type="text" className="form-control"
+                   onChange={(e) => {setUsername(e.target.value)}}/>
+            <label className={`wd-text-dark`} htmlFor={`login_username`}>Username</label>
           </div>
-          <div className="form-group justify-content-sm-center">
-            <label htmlFor="login_password" className="form-label mt-4 text-light">Password</label>
-            <input type="password" className="form-control" id="login_password"
-                   placeholder="password"
-                   onChange={(e) => {
-                     setPassword(e.target.value)}}
-            />
-          </div>
-          <div>
-            <a className="text-warning mt-4 visually-hidden" href={`#`}>Forgot password?</a>
+          <div className="form-floating mt-2">
+            <input id="login_password" type="text" className="form-control"
+                   onChange={(e) => {setPassword(e.target.value)}}/>
+            <label className={`wd-text-dark`} htmlFor={`login_password`}>Password</label>
           </div>
           <div className={"pt-3"}>
             <button onClick={login} className="btn btn-primary">
