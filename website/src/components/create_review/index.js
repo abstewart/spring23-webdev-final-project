@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {useSelector} from "react-redux";
 import {createReview} from "../../services/reviews/reviews-service";
 
-function ReviewForm({ parkCode }) {
+function ReviewForm({ parkCode, park_name }) {
     const [rating, setRating] = useState(5);
     const [summary, setSummary] = useState('');
     const [message, setMessage] = useState('');
@@ -31,6 +31,7 @@ function ReviewForm({ parkCode }) {
             // likes: 0, // this will be added by the server
             creation_date: new Date (Date.now()),
             hidden: isPrivate,
+            park_name: park_name
         };
         // do something with the review, e.g. send it to a server
         console.log(review);

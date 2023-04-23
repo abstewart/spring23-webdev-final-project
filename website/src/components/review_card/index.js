@@ -19,7 +19,8 @@ const ParkReview = (
             rating: 10,
             likes: 0,
             creation_date: new Date(Date.now()),
-            hidden: false
+            hidden: false,
+            parkName: "N/A"
         }
     }
 ) => {
@@ -41,41 +42,33 @@ const ParkReview = (
                 setNumLikes(resp.numLikes);
             };
             if(review._id){
-                fetchNumLikes(review).then(r => console.log(r));
+                fetchNumLikes(review).then();
             }
-            findWhoLiked(review).then(r => console.log(r));
+            findWhoLiked(review).then();
 
         }
 
     }, []);
 
     function handleLike() {
-        console.log("Like this review");
         const likeReview = async (review) => {
             const resp = await createReviewLike(review._id);
-            console.log(resp)
             const resp2 = await numLikesForReview(review._id);
-            console.log(resp2)
             setNumLikes(resp2.numLikes);
         };
         likeReview(review).then(r => findWhoLiked(review));
     }
 
     function handleUnlike() {
-        console.log("Unlike this review");
-        console.log(review._id)
         const unlikeReview = async (review) => {
             const resp = await deleteReviewLikeByParams(review._id);
-            console.log(resp)
             const resp2 = await numLikesForReview(review._id);
-            console.log(resp2)
             setNumLikes(resp2.numLikes);
         };
         unlikeReview(review).then(r => findWhoLiked(review));
     }
 
     function likeorUnlike() {
-        console.log(whoLiked)
         //if the user has already liked this review return a button that says "Unlike"
         //else return a button that says "Like"
         if (!whoLiked.includes(currentUser.username)) {
@@ -90,7 +83,7 @@ const ParkReview = (
         return (
             <div className={""}>
                 <div className="card">
-                    <a href={"/details/" + review.parkId} className="btn btn-primary stretched-link"><h3>{review.parkId}</h3></a>
+                    <a href={"/details/" + review.parkId} className="btn btn-primary stretched-link"><h3>{review.park_name}</h3></a>
                     <div className="card-body">
                         <h5 className="card-title">{review.summary}</h5>
                         <a href={"/profile/" + review.author} className={"author-link"}><h5 className="card-subtitle mb-2 text-muted">Author: {review.author}</h5></a>
@@ -103,25 +96,25 @@ const ParkReview = (
                         {likeorUnlike()}
                     </div>
                 </div>
-
             </div>
         );
     }
     else {
         return (
-            <div className="card mb-3">
-                <a href={"/details/" + review.parkId} className="btn btn-primary stretched-link">{""}</a>
-                <h3 className="card-header">>{review.parkId}</h3>
-                <div className="card-body">
-                    <h5 className="card-title">{review.summary}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">Author: {review.author}</h6>
-                    <p className="card-text">{review.message}</p>
+            <div className={""}>
+                <div className="card">
+                    <a href={"/details/" + review.parkId} className="btn btn-primary stretched-link"><h3>{review.park_name}</h3></a>
+                    <div className="card-body">
+                        <h5 className="card-title">{review.summary}</h5>
+                        <a href={"/profile/" + review.author} className={"author-link"}><h5 className="card-subtitle mb-2 text-muted">Author: {review.author}</h5></a>
+                        <p className="card-text">{review.message}</p>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">Rating: {review.rating}/10</li>
+                            <li className="list-group-item">Likes: {numLikes}</li>
+                            <li className="list-group-item">Created: {new Date(review.creation_date).toDateString()}</li>
+                        </ul>
+                    </div>
                 </div>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Rating: {review.rating}/10</li>
-                    <li className="list-group-item">Likes: {numLikes}</li>
-                    <li className="list-group-item">Created: {new Date(review.creation_date).toDateString()}</li>
-                </ul>
             </div>
         );
     }

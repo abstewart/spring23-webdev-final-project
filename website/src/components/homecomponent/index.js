@@ -19,7 +19,7 @@ const HomeComponent = () => {
                 setReviews(reviewsData);
                 setIsLoading(false);
             };
-            fetchReviews().then(r => console.log(r));
+            fetchReviews().then();
         }
         else {
             const fetchReviews = async () => {
@@ -28,7 +28,7 @@ const HomeComponent = () => {
                 setReviews(reviewsData[0]);
                 setIsLoading(false);
             };
-            fetchReviews().then(r => console.log(r));
+            fetchReviews().then();
         }
     }, []);
 
