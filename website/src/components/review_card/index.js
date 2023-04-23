@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 const ParkReview = (
     {
         review = {
-            _id: "0",
+            _id: null,
             parkId: "N/A",
             summary: "This is a summary",
             message: "This is a message",
@@ -32,7 +32,10 @@ const ParkReview = (
                 const resp = await numLikesForReview(review._id);
                 setNumLikes(resp.numLikes);
             };
-            fetchNumLikes(review).then(r => console.log(r));
+            if(review._id){
+                fetchNumLikes(review).then(r => console.log(r));
+            }
+
 
             const findWhoLiked = async (review) => {
                 const resp = await findWhoLikedReview(review._id);
