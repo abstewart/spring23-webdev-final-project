@@ -11,7 +11,7 @@ const Register = () => {
     const {loading, error} = useSelector((state) => state.users);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [rUser, setRUser] = useState({});
+    const [rUser, setRUser] = useState({role: "USER"});
 
     //clear any error message from other screens
     useEffect(() => {dispatch(clearErrLoad())}, [])
@@ -103,9 +103,8 @@ const Register = () => {
                                          setRUser({...rUser, pass1: e.target.value})}}/>
                               <label className={`text-dark`} htmlFor={`register_password_1`}>Password</label>
                           </div>
-                          {/*<div className={`text-info`}>Password must be 8-32 characters in length, include 1 number, and one of ['!@#$%&*]</div>*/}
                           <div className="mt-3">
-                              <label className={`text-secondary`} htmlFor={`register_show_password`}>Show password: &nbsp;</label>
+                              <label className={`text-secondary text-light`} htmlFor={`register_show_password`}>Show password: &nbsp;</label>
                               <input type={`checkbox`} id={`register_show_password`} onClick={handlePasswordToggle}/>
                           </div>
                       </div>
@@ -115,6 +114,25 @@ const Register = () => {
                                      setRUser({...rUser, pass2: e.target.value})}}/>
                           <label className={`text-dark`} htmlFor={`register_password_2`}>Repeat Password</label>
                       </div>
+                  </div>
+              </div>
+              <div className={"form-group"}>
+                  <span className="text-light me-3">Role:</span>
+                  <div className="form-check form-check-inline me-5">
+                      <input className="form-check-input" type="radio"
+                             name="inlineRadioOptions" id="inlineRadio1"
+                             value="User" checked onChange={(e) => {
+                          setRUser({...rUser, role: "USER"})}}/>
+                          <label className="form-check-label"
+                                 htmlFor="inlineRadio1">User</label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                      <input className="form-check-input" type="radio"
+                             name="inlineRadioOptions" id="inlineRadio2"
+                             value="Admin" onChange={(e) => {
+                          setRUser({...rUser, role: "ADMIN"})}}/>
+                          <label className="form-check-label"
+                                 htmlFor="inlineRadio2">Admin</label>
                   </div>
               </div>
               <button type="button" onClick={tryRegister} className={"btn btn-primary"}>
