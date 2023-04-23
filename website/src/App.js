@@ -27,7 +27,7 @@ function App() {
                 <Route path={`/home`} element={<Home/>}/>
                 <Route path={`/search`} element={<Search/>}/>
                 <Route path={`/search/:val?/:keywords?/:state?/`} element={<SearchResults/>}/>
-                <Route path={`/profile`} element={<Profile/>}/>
+                <Route path={`/profile`} element={<MyProfile/>}/>
                 <Route path={`/profile/:uid`} element={<Profile/>}/>
                 <Route path={`/login`} element={<Login/>}/>
                 <Route path={`/register`} element={<Register/>}/>
