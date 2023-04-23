@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import CurrentUserContext from "./redux/current-user-context";
 import ParkDetails from "./components/park-details";
 import SearchResults from "./pages/search-results";
+import MyProfile from "./pages/my-profile";
 
 function App() {
   return (

@@ -2,6 +2,7 @@ import MPDetails from "./mp-details";
 import {useEffect} from "react";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import NavBar from "../../components/nav-bar";
 
 
 const MyProfile = () => {
@@ -16,6 +17,7 @@ const MyProfile = () => {
   return(
       <>
         <div>
+          <NavBar active={`profile`}/>
           <MPDetails/>
         </div>
         <div>
