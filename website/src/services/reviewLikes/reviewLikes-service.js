@@ -35,6 +35,7 @@ export const createReviewLike = async (reviewId) => {
 };
 export const deleteReviewLike = async (reviewLikeId) => {
   const response = await api.delete(`${REVIEW_LIKES_API}/${reviewLikeId}`);
+  console.log("deleteReviewLike response: ", response.data)
   return response.data;
 };
 export const deleteReviewLikeByParams = async (review) => {

@@ -83,7 +83,7 @@ const HomeComponent = () => {
                         {renderContent()}
                     </div>
                 </div>
-                <div className={"container"}>
+                <div className={"container pb-5"}>
                     <div className="row mt-5 p-2 bg-primary rounded">
                         <h3 className={"text-light pb-2"}>Interested in joining our community?</h3>
                         <div className="col-6">

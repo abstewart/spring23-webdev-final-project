@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     createReviewLike,
-    deleteReviewLike,
+    deleteReviewLikeByParams,
     findWhoLikedReview,
     numLikesForReview
 } from "../../services/reviewLikes/reviewLikes-service";
@@ -26,6 +26,14 @@ const ParkReview = (
     const { currentUser } = useSelector((state) => state.users);
     const [numLikes, setNumLikes] = useState(0);
     const [whoLiked, setWhoLiked] = useState([]);
+
+    const findWhoLiked = async (review) => {
+        const resp = await findWhoLikedReview(review._id);
+        // remove all IDs from the array and only keep usernames
+        const usernames = resp.map((user) => user.username);
+        setWhoLiked(usernames);
+    };
+
     useEffect(() => {
         if (currentUser){
             const fetchNumLikes = async (review) => {
@@ -35,14 +43,6 @@ const ParkReview = (
             if(review._id){
                 fetchNumLikes(review).then(r => console.log(r));
             }
-
-
-            const findWhoLiked = async (review) => {
-                const resp = await findWhoLikedReview(review._id);
-                // remove all IDs from the array and only keep usernames
-                const usernames = resp.map((user) => user.username);
-                setWhoLiked(usernames);
-            };
             findWhoLiked(review).then(r => console.log(r));
 
         }
@@ -58,20 +58,20 @@ const ParkReview = (
             console.log(resp2)
             setNumLikes(resp2.numLikes);
         };
-        likeReview(review).then(r => console.log(r));
+        likeReview(review).then(r => findWhoLiked(r));
     }
 
     function handleUnlike() {
         console.log("Unlike this review");
-
+        console.log(review._id)
         const unlikeReview = async (review) => {
-            const resp = await deleteReviewLike(review._id);
+            const resp = await deleteReviewLikeByParams(review._id);
             console.log(resp)
             const resp2 = await numLikesForReview(review._id);
             console.log(resp2)
             setNumLikes(resp2.numLikes);
         };
-        unlikeReview(review).then(r => console.log(r));
+        unlikeReview(review).then(r => findWhoLiked(r));
     }
 
     function likeorUnlike() {
@@ -87,7 +87,6 @@ const ParkReview = (
     }
 
     if (currentUser) {
-
         return (
             <div className={""}>
                 <div className="card">
