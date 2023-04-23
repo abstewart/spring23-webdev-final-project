@@ -58,7 +58,7 @@ const ParkReview = (
             console.log(resp2)
             setNumLikes(resp2.numLikes);
         };
-        likeReview(review).then(r => findWhoLiked(r));
+        likeReview(review).then(r => findWhoLiked(review));
     }
 
     function handleUnlike() {
@@ -71,7 +71,7 @@ const ParkReview = (
             console.log(resp2)
             setNumLikes(resp2.numLikes);
         };
-        unlikeReview(review).then(r => findWhoLiked(r));
+        unlikeReview(review).then(r => findWhoLiked(review));
     }
 
     function likeorUnlike() {
