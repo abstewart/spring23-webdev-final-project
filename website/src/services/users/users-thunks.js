@@ -11,7 +11,7 @@ export const findAllUsersThunk = createAsyncThunk(
 export const findUserByIdThunk = createAsyncThunk(
     "users/findById",
     async (id) => {
-      const response = await userService.findUserById(id);
+      const response = await userService.findUserByUsername(id);
       return response;
     }
 );

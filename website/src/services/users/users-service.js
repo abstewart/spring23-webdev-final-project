@@ -12,7 +12,7 @@ export const findAllUsers = async () => {
   return response.data;
 };
 
-export const findUserById = async (username) => {
+export const findUserByUsername = async (username) => {
   const response = await api.get(`${USERS_API}/username/${username}`);
   return response.data;
 };
