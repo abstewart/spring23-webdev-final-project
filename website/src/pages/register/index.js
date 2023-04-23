@@ -50,7 +50,6 @@ const Register = () => {
         } catch (err) {
             console.log("ERROR!");
             console.log(err.message)
-            return;
         }
         navigate("/profile");
     };
@@ -71,13 +70,13 @@ const Register = () => {
                           <input id="register_first_name" type="text" className="form-control"
                                  onChange={(e) => {
                                      setRUser({...rUser, fname: e.target.value})}}/>
-                          <label className={`text-dark`} htmlFor={`register_first_name`}>First Name</label>
+                          <label className={`wd-text-dark`} htmlFor={`register_first_name`}>First Name</label>
                       </div>
                       <div className="form-floating col-6">
                           <input id="register_last_name" type="text" className="form-control"
                                  onChange={(e) => {
                                      setRUser({...rUser, lname: e.target.value})}}/>
-                          <label className={`text-dark`} htmlFor={`register_last_name`}>Last Name</label>
+                          <label className={`wd-text-dark`} htmlFor={`register_last_name`}>Last Name</label>
                       </div>
                   </div>
               </div>
@@ -86,7 +85,7 @@ const Register = () => {
                       <input id="register_email" type="text" className="form-control"
                              onChange={(e) => {
                                  setRUser({...rUser, email: e.target.value})}}/>
-                      <label className={`text-dark`} htmlFor={`register_email`}>Email</label>
+                      <label className={`wd-text-dark`} htmlFor={`register_email`}>Email</label>
                   </div>
               </div>
               <div className={"row pt-3"}>
@@ -94,17 +93,17 @@ const Register = () => {
                       <input id="register_username" type="text" className="form-control"
                              onChange={(e) => {
                                  setRUser({...rUser, username: e.target.value})}}/>
-                      <label className={`text-dark`} htmlFor={`register_username`}>Username</label>
+                      <label className={`wd-text-dark`} htmlFor={`register_username`}>Username</label>
                   </div>
               </div>
               <div className={"form-group"}>
                   <div className={"row pt-3 pb-3"}>
                       <div className="col-6">
                           <div className="form-floating">
-                              <input id="register_password_1" type="password" className="form-control"
+                              <input id="register_password_1" type="password" className="form-control ps-3"
                                      onChange={(e) => {
                                          setRUser({...rUser, pass1: e.target.value})}}/>
-                              <label className={`text-dark`} htmlFor={`register_password_1`}>Password</label>
+                              <label className={`wd-text-dark ps-1`} htmlFor={`register_password_1`}>Password</label>
                           </div>
                           <div className="mt-3">
                               <label className={`text-secondary text-light`} htmlFor={`register_show_password`}>Show password: &nbsp;</label>
@@ -115,7 +114,7 @@ const Register = () => {
                           <input id="register_password_2" type="password" className="form-control"
                                  onChange={(e) => {
                                      setRUser({...rUser, pass2: e.target.value})}}/>
-                          <label className={`text-dark`} htmlFor={`register_password_2`}>Repeat Password</label>
+                          <label className={`wd-text-dark`} htmlFor={`register_password_2`}>Repeat Password</label>
                       </div>
                   </div>
               </div>
