@@ -24,51 +24,43 @@ const NavBar = ({active = null}) => {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <div className="container-fluid">
-            <Link className="navbar-brand" to="/home">National Parks!</Link>
-            <div className="collapse navbar-collapse" id="navbarColor01">
+            <div className="navbar-collapse" id="navbarColor01">
+              <div className={""}>
+                <Link className="navbar-collapse navbar-brand text-center" to="/home">National Parks!</Link>
+              </div>
               <ul className="navbar-nav me-auto">
-                <li className="nav-item">
+                <li className="nav-item text-center">
                   <Link className={`nav-link ${active === 'home'?'active':''}`} to="/home">Home</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item text-center">
                   <Link className={`nav-link ${active === 'search'?'active':''}`} to="/search">Search</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item text-center">
                   <Link className={`nav-link ${active === 'login'?'active':''}`} to="/login">Login</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item text-center">
                   <Link className={`nav-link ${active === 'register'?'active':''}`} to="/register">Register</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item text-center">
                   <Link className={`nav-link ${active === 'profile'?'active':''}`} to="/profile">Profile</Link>
                 </li>
-                <li className="d-flex p-2">
-                  <div className="text-light h4 mb-0 align-self-center">
-                    <span>Welcome:&nbsp;</span>
-                    <span>{currentUser ? currentUser.username : "Anonymous"}
-                    </span>
+                <li className=" ps-3 ">
+                  <div className="text-light h4 text-center row">
+                    <div className={"col-lg-6 d-xl-block pt-3 d-lg-none pe-lg-5"}>
+                      Welcome:&nbsp;
+                      {currentUser ? currentUser.username : "Anonymous"}
+                    </div>
+                    <div className={"col-lg-6 pt-2 ps-xl-5 d-block"}>
+                      {currentUser &&
+                          <button onClick={() => dispatch(logoutThunk())}
+                                  className="btn btn-warning">
+                            Logout
+                          </button>}
+                    </div>
                   </div>
                 </li>
-                {/*<li className="nav-item dropdown">*/}
-                {/*  <a className="nav-link dropdown-toggle"*/}
-                {/*     data-bs-toggle="dropdown" href="#" role="button"*/}
-                {/*     aria-haspopup="true" aria-expanded="false">Dropdown</a>*/}
-                {/*  <div className="dropdown-menu">*/}
-                {/*    <a className="dropdown-item" href="#">Action</a>*/}
-                {/*    <a className="dropdown-item" href="#">Another action</a>*/}
-                {/*    <a className="dropdown-item" href="#">Something else*/}
-                {/*      here</a>*/}
-                {/*    <div className="dropdown-divider"></div>*/}
-                {/*    <a className="dropdown-item" href="#">Separated link</a>*/}
-                {/*  </div>*/}
-                {/*</li>*/}
               </ul>
               <div className="d-flex p-1">
-                {currentUser &&
-                    <button onClick={() => dispatch(logoutThunk())}
-                    className="btn btn-warning">
-                      Logout
-                    </button>}
                 <input className="form-control me-sm-2" type="text"
                        placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}/>
                 <button className="btn btn-secondary my-2 my-sm-0"

@@ -67,7 +67,7 @@ const SearchSidebar = () => {
             link += "/";
         }
 
-        console.log(link)
+        console.log("This is the link:", link);
         return link;
     }
 

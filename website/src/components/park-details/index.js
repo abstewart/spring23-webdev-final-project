@@ -26,7 +26,7 @@ const ParkDetails = () => {
             return (
                 <div>
                     <h2>Leave a Review</h2>
-                    <ReviewForm parkCode={parkCode}/>
+                    <ReviewForm parkCode={parkCode} park_name={park.fullName}/>
                 </div>
             )
         }
