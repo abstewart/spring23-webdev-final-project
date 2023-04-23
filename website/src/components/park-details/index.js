@@ -11,6 +11,8 @@ import {
     findWhoLikedPark,
     numLikesForPark
 } from "../../services/parkLikes/parkLikes-service";
+import {findReviewsByPark} from "../../services/reviews/reviews-service";
+import Review_card from "../review_card";
 
 const ParkDetails = () => {
     const {pid} = useParams();
@@ -21,6 +23,7 @@ const ParkDetails = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const { currentUser } = useSelector((state) => state.users);
+    const [topThreeReviews, setTopThreeReviews] = useState([]);
 
     const reviewIfLoggedIn = () => {
         if (currentUser) {
@@ -48,14 +51,13 @@ const ParkDetails = () => {
                 });
         };
 
-        fetchData().then(r => console.log(r));
+        fetchData().then();
 
         const fetchNumLikes = async () => {
             setIsLoading(true);
 
             numLikesForPark(parkCode)
                 .then((response) => {
-                    console.log(response.numLikes)
                     setNumLikes(response.numLikes);
                     setIsLoading(false);
                 })
@@ -64,7 +66,7 @@ const ParkDetails = () => {
                     setIsLoading(false);
                 });
         };
-        fetchNumLikes().then(r => console.log(r));
+        fetchNumLikes().then();
 
         const findWhoLiked = async (parkCode) => {
             const resp = await findWhoLikedPark(parkCode);
@@ -72,7 +74,18 @@ const ParkDetails = () => {
             const usernames = resp.map((user) => user.username);
             setWhoLiked(usernames);
         };
-        findWhoLiked(parkCode).then(r => console.log(r));
+        findWhoLiked(parkCode).then();
+
+        const fetchTopThreeReviews = async () => {
+            findReviewsByPark(parkCode)
+                .then((response) => {
+                    setTopThreeReviews(response.splice(0, 3));
+                })
+                .catch((error) => {
+                    setError(error.message);
+                });
+        };
+        fetchTopThreeReviews().then(r => console.log("Top three", r));
     }, [parkCode]);
 
 
@@ -209,7 +222,6 @@ const ParkDetails = () => {
             likeId = resp.find((like) => like.park === parkCode)._id;
         };
 
-
         const unlikePark = async (parkCode) => {
             const resp = await deleteParkLike(likeId);
             console.log(resp)
@@ -231,7 +243,6 @@ const ParkDetails = () => {
         if (currentUser === null) {
             return ;
         }
-        console.log(whoLiked)
         //if the user has already liked this review return a button that says "Unlike"
         //else return a button that says "Like"
         if (!whoLiked.includes(currentUser.username)) {
@@ -242,34 +253,25 @@ const ParkDetails = () => {
         }
     }
 
+    const reviewItem = (review, key) => {
+        return (
+            <Accordion.Item eventKey={key.toString()}>
+                <Accordion.Header>{review.summary}</Accordion.Header>
+                <Accordion.Body>
+                    <Review_card review={review}/>
+                </Accordion.Body>
+            </Accordion.Item>
+        )
+    }
+    //{park.reviews.map((review, index) => reviewItem(review, index))}
+
     const reviews = () => {
         return (
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Accordion Item #1</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Accordion Item #2</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
+            <div className={"pt-3"}>
+                <Accordion defaultActiveKey="0">
+                    {reviewItem({}, 0)}
+                </Accordion>
+            </div>
         )
     };
 
@@ -337,6 +339,7 @@ const ParkDetails = () => {
                 </div>
             </div>
             {reviewIfLoggedIn()}
+            <h3 className={"text-center pt-3"}>Top 3 Reviews for {park.fullName} by likes</h3>
             {reviews()}
         </div>
     );
