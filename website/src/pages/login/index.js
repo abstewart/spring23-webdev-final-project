@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../services/users/users-thunks";
 import {clearErrLoad} from "../../redux/users-reducer";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
 
@@ -30,10 +30,12 @@ const LoginForm = () => {
       <div className="container">
         <NavBar active={`login`}/>
         <h1 className={`display-3 text-center`}>Login</h1>
-
+        <h4 className={`text-center`}>
+          <span className={`pe-2`}>No account?</span><Link to={"/register"}>Register</Link>
+        </h4>
         <div>
           <div className="form-group">
-            <label className="form-label mt-4" htmlFor="login_username">Username</label>
+            <label className="form-label text-light" htmlFor="login_username">Username</label>
             <input
                 className="form-control"
                 id="login_username"
@@ -45,7 +47,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="form-group justify-content-sm-center">
-            <label htmlFor="login_password" className="form-label mt-4">Password</label>
+            <label htmlFor="login_password" className="form-label mt-4 text-light">Password</label>
             <input type="password" className="form-control" id="login_password"
                    placeholder="password"
                    onChange={(e) => {

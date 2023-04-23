@@ -2,7 +2,7 @@ import NavBar from "../../components/nav-bar";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "../../services/users/users-thunks";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {clearErrLoad, setError} from "../../redux/users-reducer";
 
 //lots of examples here https://bootswatch.com/slate/
@@ -60,8 +60,11 @@ const Register = () => {
   return(
       <div className={`container`}>
         <NavBar active="register"/>
+          <h1 className={`display-3 text-center`}>Register</h1>
+          <h4 className={`text-center`}>
+              <span className={`pe-2`}>Already signed up?</span><Link to={"/login"}>Login</Link>
+          </h4>
           <div className={"signup-form"}>
-              <h1 className={`display-3 text-center`}>Register</h1>
               <div className={"form-group"}>
                   <div className={"row pt-3"}>
                       <div className="form-floating col-6">
