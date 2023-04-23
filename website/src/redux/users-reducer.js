@@ -35,9 +35,17 @@ const usersSlice = createSlice({
   },
   extraReducers: {
     [updateUserThunk.fulfilled]: (state, action) => {
-      state.users = state.users.map((user) =>
-          user.id === action.payload.id ? action.payload : user
-      );
+      state.currentUser = action.payload;
+      state.error = null;
+      state.loading = false;
+    },
+    [updateUserThunk.pending]: (state, action) => {
+      state.error = null;
+      state.loading = true;
+    },
+    [updateUserThunk.rejected]: (state, action) => {
+      state.error = action.error.message;
+      state.loading = false;
     },
     [createUserThunk.fulfilled]: (state, action) => {
       state.users.push(action.payload);
