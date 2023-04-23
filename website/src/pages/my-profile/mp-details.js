@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {clearErrLoad, setError} from "../../redux/users-reducer";
 import {updateUserThunk} from "../../services/users/users-thunks";
+import {Link} from "react-router-dom";
 
 const MPDetails = () => {
 
@@ -149,7 +150,7 @@ const MPDetails = () => {
         <button type="button" onClick={tryUpdate} className={"btn btn-primary"}>
           Update Profile
         </button>
-          <a href={"/profile/" + currentUser.username}> <button type="button" className={"btn btn-primary"}> See Public Profile </button> </a>
+          <Link to={currentUser ? "/profile/" + currentUser.username : "/profile"}> <button type="button" className={"btn btn-primary"}> See Public Profile </button> </Link>
         <div className={"row"}>
           {loading && <span>Loading</span>}
         </div>
