@@ -16,11 +16,9 @@ const MyProfile = () => {
 
   return(
       <>
-        <div>
+        <div className={`container`}>
           <NavBar active={`profile`}/>
           <MPDetails/>
-        </div>
-        <div>
           <div>Visited Parks</div>
           <div>Park reviews</div>
           <div>Planned trips?</div>
