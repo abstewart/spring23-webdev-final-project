@@ -16,6 +16,10 @@ export const findParksLikedByUser = async () => {
   const response = await api.get(`${PARK_LIKES_API}/byUser`);
   return response.data
 };
+
+export const findParksLikedByUsername = async (username) => {
+  const response = await api.get(`${PARK_LIKES_API}/byUsername/${username}`)
+}
 export const findWhoLikedPark = async (parkId) => {
   const response = await axios.get(`${PARK_LIKES_API}/whoLiked/${parkId}`);
   return response.data
