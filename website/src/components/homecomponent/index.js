@@ -8,27 +8,35 @@ import {findMostRecentReview, findReviewsByUser} from "../../services/reviews/re
 
 const HomeComponent = () => {
     const { currentUser } = useSelector((state) => state.users);
+    const [isLoading, setIsLoading] = useState(false);
     const [review, setReviews] = useState();
 
     useEffect(() => {
         if (!currentUser) {
             const fetchReviews = async () => {
+                setIsLoading(true);
                 const reviewsData = await findMostRecentReview();
                 setReviews(reviewsData);
+                setIsLoading(false);
             };
             fetchReviews().then(r => console.log(r));
         }
         else {
             const fetchReviews = async () => {
+                setIsLoading(true);
                 const reviewsData = await findReviewsByUser(currentUser.username);
                 setReviews(reviewsData[0]);
+                setIsLoading(false);
             };
             fetchReviews().then(r => console.log(r));
         }
     }, []);
 
     const renderContent = () => {
-        if (currentUser) {
+        if (isLoading) {
+            return <div>Loading...</div>;
+        }
+        else if (currentUser) {
             return (
                 <div>
                     <h3>Last Visited Park:</h3>
@@ -51,12 +59,8 @@ const HomeComponent = () => {
             <NavBar/>
             <div className={"row pt-5"}>
             <div className={"col-lg-8 col-sm-12 pt-2 "}>
-                <div className={"row"}>
-                    <RandomImage/>
-                </div>
-                <div className={"row"}>
-                    <RandomImage/>
-                </div>
+                <RandomImage/>
+                <RandomImage/>
             </div>
             <div className="col-lg-4 col-m-2">
                 <div className="row pt-2">

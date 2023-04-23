@@ -21,7 +21,11 @@ const RandomImage = () => {
 
     }, []);
 
-    return <img className="img-responsive " src={imageUrl} alt="Random park" />;
+    return (
+        <div className={"row pb-5 pe-3"}>
+            <img className="img-fluid rounded-5 border-5 border-dark border-opacity-100" src={imageUrl} alt="Random park" />
+        </div>
+    );
 };
 
 export default RandomImage;

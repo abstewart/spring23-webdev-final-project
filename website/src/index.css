@@ -16,4 +16,17 @@
   color: #272b30;
   background-color: #e1e1e1;
 }
-
+.img-fluid{
+  border: 3px solid #272b30;
+  padding: 0;
+}
+.btn-primary {
+  color: #e1e1e1;
+  border-color: #272b30;
+  border-width: 1px;
+}
+.btn-secondary {
+  color: #e1e1e1;
+  border-color: #272b30;
+  border-width: 1px;
+}
