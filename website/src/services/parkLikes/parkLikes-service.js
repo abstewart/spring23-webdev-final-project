@@ -43,7 +43,7 @@ export const deleteParkLikeByParams = async (parkId) => {
 
 //creating
 //get username from session
-export const createParkLike = async (parkId) => {
-  const response = await api.post(`${PARK_LIKES_API}/${parkId}`);
+export const createParkLike = async (parkId, parkName) => {
+  const response = await api.post(`${PARK_LIKES_API}/${parkId}/${parkName}`);
   return response.data;
 };
