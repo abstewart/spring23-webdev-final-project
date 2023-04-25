@@ -72,11 +72,19 @@ const ParkReview = (
         //if the user has already liked this review return a button that says "Unlike"
         //else return a button that says "Like"
         if (!whoLiked.includes(currentUser.username)) {
-            return <div className={"container pt-2"}><button type={"button"} className={"btn btn-secondary btn-like"} onClick={handleLike}>Like this Review</button></div>;
+            return <button type={"button"} className={"btn btn-secondary btn-like"} onClick={handleLike}>Like this Review</button>;
         }
         else {
-            return <div className={"container pt-2"}><button type={"button"} className={"btn btn-secondary btn-like"} onClick={handleUnlike}>Unlike this Review</button></div>;
+            return <button type={"button"} className={"btn btn-secondary btn-like"} onClick={handleUnlike}>Unlike this Review</button>;
         }
+    }
+
+    const deleteReview = () => {
+
+    }
+
+    if(review._id === null) {
+        return <></>
     }
 
     if (currentUser) {
@@ -93,7 +101,12 @@ const ParkReview = (
                             <li className="list-group-item">Likes: {numLikes}</li>
                             <li className="list-group-item">Created: {new Date(review.creation_date).toDateString()}</li>
                         </ul>
-                        {likeorUnlike()}
+                        <div className={"container pt-2"}>
+                            {likeorUnlike()}
+                            {currentUser.role === "ADMIN" && <button type={"button"} className={"btn btn-danger float-end"} onClick={deleteReview}>Delete Review</button>}
+                        </div>
+
+
                     </div>
                 </div>
             </div>
