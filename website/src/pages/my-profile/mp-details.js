@@ -1,13 +1,17 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {clearErrLoad, setError} from "../../redux/users-reducer";
-import {updateUserThunk} from "../../services/users/users-thunks";
-import {Link} from "react-router-dom";
+import {
+  deleteUserThunk, logoutThunk,
+  updateUserThunk
+} from "../../services/users/users-thunks";
+import {Link, useNavigate} from "react-router-dom";
 
 const MPDetails = () => {
 
   const {currentUser, loading, error} = useSelector((state) => state.users);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialUser = {
     ...currentUser,
     password: "",
@@ -16,6 +20,7 @@ const MPDetails = () => {
   const [oldPass, setOldPass] = useState("");
   const [newPass1, setNewPass1] = useState("");
   const [newPass2, setNewPass2] = useState("");
+  const [deleteAcct, setDeleteAcct] = useState(false);
 
   //clear any error message from other screens
   useEffect(() => {dispatch(clearErrLoad())}, [])
@@ -40,12 +45,12 @@ const MPDetails = () => {
 
     //check if old password is good
     if(currentUser.password !== oldPass ){
-      dispatch(setError("Old password must be correct!"));
+      dispatch(setError("Old password must be correct to update profile"));
       return;
     }
     //check if new passwords match
     if(newPass1 !== newPass2) {
-      dispatch(setError("New passwords must match!"));
+      dispatch(setError("New passwords must match"));
       return;
     }
     //make the newUser update object
@@ -62,17 +67,29 @@ const MPDetails = () => {
     }
 
     //try to update the user
-
-    console.log(settingUser);
-
+    //console.log(settingUser);
     try {
       await dispatch(updateUserThunk(settingUser)).unwrap();
     } catch (err) {
       console.log("ERROR!");
       console.log(err.message);
     }
+  }
 
-    //clear the error message
+  const tryDeleteAcct = () => {
+    if(!deleteAcct) {
+      alert("Are you sure you want to delete your account? Once taken this action can't be undone. Click the button again to delete account.")
+      setDeleteAcct(true);
+      return;
+    }
+
+    //actually delete account
+    const toDelete = currentUser._id;
+    dispatch(logoutThunk())
+    dispatch(deleteUserThunk(currentUser._id));
+
+    alert("Account Deleted");
+    navigate("/home");
 
   }
 
@@ -150,12 +167,15 @@ const MPDetails = () => {
         <button type="button" onClick={tryUpdate} className={"btn btn-primary"}>
           Update Profile
         </button>
+        <button type="button" onClick={tryDeleteAcct} className={"btn btn-danger float-end"}>
+          Delete Account
+        </button>
           <Link to={currentUser ? "/profile/" + currentUser.username : "/profile"}> <button type="button" className={"btn btn-primary"}> See Public Profile </button> </Link>
         <div className={"row"}>
           {loading && <span>Loading</span>}
         </div>
         <div className={"row"}>
-          {error && <span className="text-danger display-6"> {error} </span>}
+          {error && <span className="text-info fw-semibold"> {error} </span>}
         </div>
       </div>
   );
