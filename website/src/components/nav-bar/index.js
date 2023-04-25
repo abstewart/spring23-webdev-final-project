@@ -52,7 +52,10 @@ const NavBar = ({active = null}) => {
                     </div>
                     <div className={"col-lg-6 pt-2 ps-xl-5 d-block"}>
                       {currentUser &&
-                          <button onClick={() => dispatch(logoutThunk())}
+                          <button onClick={() => {
+                            dispatch(logoutThunk());
+                            navigate("/home");
+                          }}
                                   className="btn btn-warning">
                             Logout
                           </button>}
