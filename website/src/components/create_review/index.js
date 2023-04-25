@@ -21,21 +21,24 @@ function ReviewForm({ parkCode, park_name }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        const author = currentUser['username']; // replace with actual code to get the logged in user
+        const author = currentUser['username'];
         const review = {
             parkId: parkCode,
             author,
             rating,
             summary,
             message,
-            // likes: 0, // this will be added by the server
             creation_date: new Date (Date.now()),
             hidden: isPrivate,
             park_name: park_name
         };
         // do something with the review, e.g. send it to a server
         console.log(review);
-        createReview(review).then(r => {console.log(r);resetForm()});
+        createReview(review).then(r => {
+            console.log(r);
+            resetForm();
+            window.location.reload();
+        });
     }
 
     return (
@@ -85,7 +88,7 @@ function ReviewForm({ parkCode, park_name }) {
                 />
             </label>
             <br />
-            <button type="submit">Submit Review</button>
+            <button type="submit" className={`btn btn-primary`}>Submit Review</button>
         </form>
         </div>
     );
