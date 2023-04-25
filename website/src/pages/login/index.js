@@ -7,7 +7,7 @@ import {Link, useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
 
-  const {loading, error } = useSelector((state) => state.users);
+  const {loading, error, currentUser} = useSelector((state) => state.users);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -24,7 +24,12 @@ const LoginForm = () => {
     navigate("/profile");
   };
 
-  useEffect(() => {dispatch(clearErrLoad())}, [])
+  useEffect(() => {
+    if(currentUser) {
+      navigate("/profile");
+    }
+    dispatch(clearErrLoad())
+  }, [currentUser])
 
   return (
       <div className="container">
