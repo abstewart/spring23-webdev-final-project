@@ -46,11 +46,11 @@ const NavBar = ({active = null}) => {
                 </li>
                 <li className=" ps-3 ">
                   <div className="text-light h4 text-center row">
-                    <div className={"col-lg-6 d-xl-block pt-3 d-lg-none pe-lg-5"}>
-                      Welcome:&nbsp;
+                    <div className={"col-lg-6 d-lg-inline pt-3  pe-md-0 pe-xl-0 pe-xxl-5"}>
+                      <span className="d-lg-none d-xxl-inline">Welcome:&nbsp;</span>
                       {currentUser ? currentUser.username : "Anonymous"}
                     </div>
-                    <div className={"col-lg-6 pt-2 ps-xl-5 d-block"}>
+                    <div className={"col-lg-6 pt-2 ps-xl-4 ps-xxl-5 d-inline"}>
                       {currentUser &&
                           <button onClick={() => {
                             dispatch(logoutThunk());
@@ -63,7 +63,7 @@ const NavBar = ({active = null}) => {
                   </div>
                 </li>
               </ul>
-              <div className="d-flex p-1">
+              <div className="d-flex p-1 d-lg-none d-xl-flex">
                 <input className="form-control me-sm-2" type="text"
                        placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}/>
                 <button className="btn btn-secondary my-2 my-sm-0"
