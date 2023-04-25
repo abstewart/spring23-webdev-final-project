@@ -13,6 +13,7 @@ import {
 } from "../../services/parkLikes/parkLikes-service";
 import {findReviewsByPark} from "../../services/reviews/reviews-service";
 import Review_card from "../review_card";
+import {numLikesForReview} from "../../services/reviewLikes/reviewLikes-service";
 
 const ParkDetails = () => {
     const {pid} = useParams();
@@ -77,13 +78,8 @@ const ParkDetails = () => {
         findWhoLiked(parkCode).then();
 
         const fetchTopThreeReviews = async () => {
-            findReviewsByPark(parkCode)
-                .then((response) => {
-                    setTopThreeReviews(response.splice(0, 3));
-                })
-                .catch((error) => {
-                    setError(error.message);
-                });
+            const resp = await findReviewsByPark(parkCode);
+            setTopThreeReviews(resp.slice(0, 3));
         };
         fetchTopThreeReviews().then(r => console.log("Top three", r));
     }, [parkCode]);
@@ -240,7 +236,7 @@ const ParkDetails = () => {
     }
 
     function likeorUnlike() {
-        if (currentUser === null) {
+        if (currentUser === null || currentUser === undefined) {
             return ;
         }
         //if the user has already liked this review return a button that says "Unlike"
@@ -269,7 +265,7 @@ const ParkDetails = () => {
         return (
             <div className={"pt-3"}>
                 <Accordion defaultActiveKey="0">
-                    {reviewItem({}, 0)}
+                    {topThreeReviews.map((review, index) => reviewItem(review, index))}
                 </Accordion>
             </div>
         )
