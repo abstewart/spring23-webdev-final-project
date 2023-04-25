@@ -96,7 +96,7 @@ const ParkReview = (
         }
         console.log("review deleted")
         review._id = null;
-        this.forceUpdate();
+        window.location.reload();
     }
 
     if(review._id === null) {
