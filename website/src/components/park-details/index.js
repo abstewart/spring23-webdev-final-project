@@ -261,7 +261,7 @@ const ParkDetails = () => {
     }
     //{park.reviews.map((review, index) => reviewItem(review, index))}
 
-    const reviews = () => {
+    const Reviews = () => {
         return (
             <div className={"pt-3"}>
                 <Accordion defaultActiveKey="0">
@@ -335,8 +335,9 @@ const ParkDetails = () => {
                 </div>
             </div>
             {reviewIfLoggedIn()}
-            <h3 className={"text-center pt-3"}>Top 3 Reviews for {park.fullName} by likes</h3>
-            {reviews()}
+            <h3 className={"text-center pt-3"}>3 Most Recent Reviews for {park.fullName}</h3>
+            {/*{reviews()}*/}
+            <Reviews/>
         </div>
     );
 };

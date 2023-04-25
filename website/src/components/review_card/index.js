@@ -6,6 +6,8 @@ import {
     numLikesForReview
 } from "../../services/reviewLikes/reviewLikes-service";
 import {useSelector} from "react-redux";
+import {deleteReview} from "../../services/reviews/reviews-service";
+import {Link} from "react-router-dom";
 
 
 const ParkReview = (
@@ -79,8 +81,22 @@ const ParkReview = (
         }
     }
 
-    const deleteReview = () => {
+    const delReviewBtn = () => {
+        if(currentUser.role === "ADMIN"){
+            return(<button type={"button"} className={"btn btn-danger btn-like float-end"} onClick={tryDeleteReview}>Delete Review</button>);
+        }
+        return <></>
+    }
 
+    const tryDeleteReview = async () => {
+        try {
+            await deleteReview(review._id);
+        } catch (err) {
+            console.log(err);
+        }
+        console.log("review deleted")
+        review._id = null;
+        this.forceUpdate();
     }
 
     if(review._id === null) {
@@ -91,10 +107,10 @@ const ParkReview = (
         return (
             <div className={""}>
                 <div className="card">
-                    <a href={"/details/" + review.parkId} className="btn btn-primary stretched-link"><h3>{review.park_name}</h3></a>
+                    <Link to={"/details/" + review.parkId} className="btn btn-primary stretched-link"><h3>{review.park_name}</h3></Link>
                     <div className="card-body">
                         <h5 className="card-title">{review.summary}</h5>
-                        <a href={"/profile/" + review.author} className={"author-link"}><h5 className="card-subtitle mb-2 text-muted">Author: {review.author}</h5></a>
+                        <Link to={"/profile/" + review.author} className={"author-link"}><h5 className="card-subtitle mb-2 text-muted">Author: {review.author}</h5></Link>
                         <p className="card-text">{review.message}</p>
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item">Rating: {review.rating}/10</li>
@@ -103,10 +119,8 @@ const ParkReview = (
                         </ul>
                         <div className={"container pt-2"}>
                             {likeorUnlike()}
-                            {currentUser.role === "ADMIN" && <button type={"button"} className={"btn btn-danger float-end"} onClick={deleteReview}>Delete Review</button>}
+                            {delReviewBtn()}
                         </div>
-
-
                     </div>
                 </div>
             </div>
