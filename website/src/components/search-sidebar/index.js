@@ -28,7 +28,7 @@ const SearchSidebar = () => {
             console.log("These are the selected keywords", selectedKeywords);
         }
 
-        if (state.state === " ") {
+        if (state.state === " " || state.state === undefined) {
             setSelectedState('None');
         }
         else {
