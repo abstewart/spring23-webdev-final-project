@@ -13,8 +13,6 @@ const SearchSidebar = () => {
     const state = useParams();
 
     useEffect(() => {
-        console.log(val.val);
-        console.log(state.state);
         if (val.val === " ") {
             setSearchTerm('');
         }
@@ -22,7 +20,7 @@ const SearchSidebar = () => {
             setSearchTerm(val.val);
         }
 
-        if (keywords.keywords === " ") {
+        if (keywords.keywords === " " || keywords.keywords === undefined) {
             setSelectedKeywords([]);
         }
         else {
@@ -84,6 +82,9 @@ const SearchSidebar = () => {
     }
 
     function handleOption(optionVal, optionView, selectedBank) {
+        if (selectedBank === undefined) {
+            return <option value={optionVal}>{optionView}</option>
+        }
         if (selectedBank.includes(optionVal) || selectedState === optionVal) {
             return <option value={optionVal} selected>{optionView}</option>
         }
@@ -116,7 +117,7 @@ const SearchSidebar = () => {
             <div className="form-group">
                 <label htmlFor="exampleSelect2" className="form-label mt-4">State Search:</label>
                 <select className="form-select" id="exampleSelect2" onChange={(e) => setSelectedState(e.target.value)}>
-                    {handleOption("NONE", "None", selectedState)}
+                    {handleOption(" ", "None", selectedState)}
                     {handleOption("AL", "Alabama", selectedState)}
                     {handleOption("AK", "Alaska", selectedState)}
                     {handleOption("AZ", "Arizona", selectedState)}
