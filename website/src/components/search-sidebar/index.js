@@ -29,7 +29,7 @@ const SearchSidebar = () => {
         }
 
         if (state.state === " " || state.state === undefined) {
-            setSelectedState('None');
+            setSelectedState(' ');
         }
         else {
             setSelectedState(state.state);
