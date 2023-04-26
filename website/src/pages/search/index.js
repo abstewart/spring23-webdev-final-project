@@ -7,7 +7,7 @@ const Search = () => {
         <>
             <NavBar active="search"/>
             <div className={"row pt-5"}>
-                <div className={"col-4"}>
+                <div className={"col-lg-4 pb-3"}>
                     <SearchSidebar/>
                 </div>
             </div>

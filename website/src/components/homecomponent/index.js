@@ -37,13 +37,23 @@ const HomeComponent = () => {
             return <div>Loading...</div>;
         }
         else if (currentUser) {
-            return (
-                <div>
-                    <h3>Hi, {currentUser.first_name}!</h3>
-                    <h3>Take a look at the last park you reviewed:</h3>
-                    <ParkReview review={review}/>
-                </div>
-            );
+            if (review) {
+                return (
+                    <div>
+                        <h3>Hi, {currentUser.first_name}!</h3>
+                        <h3>Take a look at the last park you reviewed:</h3>
+                        <ParkReview review={review}/>
+                    </div>
+                );
+            }
+            else {
+                return (
+                    <div>
+                        <h3>Hi, {currentUser.first_name}!</h3>
+                        <h3>No reviews yet? Go write one!</h3>
+                    </div>
+                );
+            }
         } else {
             return (
                 <div>

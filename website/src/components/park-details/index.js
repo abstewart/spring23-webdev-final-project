@@ -13,7 +13,6 @@ import {
 } from "../../services/parkLikes/parkLikes-service";
 import {findReviewsByPark} from "../../services/reviews/reviews-service";
 import Review_card from "../review_card";
-import {numLikesForReview} from "../../services/reviewLikes/reviewLikes-service";
 
 const ParkDetails = () => {
     const {pid} = useParams();
@@ -262,13 +261,18 @@ const ParkDetails = () => {
     //{park.reviews.map((review, index) => reviewItem(review, index))}
 
     const Reviews = () => {
-        return (
-            <div className={"pt-3"}>
-                <Accordion defaultActiveKey="0">
-                    {topThreeReviews.map((review, index) => reviewItem(review, index))}
-                </Accordion>
-            </div>
-        )
+        if (topThreeReviews.length === 0) {
+        }
+        else {
+            return (
+                <div className={""}>
+                    <h3 className={"text-center pt-3"}>Most Recent Reviews for {park.fullName}</h3>
+                    <Accordion defaultActiveKey="0" className={"pt-3"}>
+                        {topThreeReviews.map((review, index) => reviewItem(review, index))}
+                    </Accordion>
+                </div>
+            )
+        }
     };
 
     return (
@@ -335,7 +339,6 @@ const ParkDetails = () => {
                 </div>
             </div>
             {reviewIfLoggedIn()}
-            <h3 className={"text-center pt-3"}>3 Most Recent Reviews for {park.fullName}</h3>
             {/*{reviews()}*/}
             <Reviews/>
         </div>
