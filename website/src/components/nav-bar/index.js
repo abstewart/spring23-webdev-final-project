@@ -16,7 +16,7 @@ const NavBar = ({active = null}) => {
 
   function handleSearch() {
     //navigate to /search/searchTerm
-    navigate(`/search/${searchTerm}//`);
+    navigate(`/search/${searchTerm}/ / /`);
     refreshPage();
   }
 
