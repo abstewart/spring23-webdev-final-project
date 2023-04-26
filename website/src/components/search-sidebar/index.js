@@ -13,21 +13,24 @@ const SearchSidebar = () => {
     const state = useParams();
 
     useEffect(() => {
-        if (val.val === undefined) {
+        console.log(val.val);
+        console.log(state.state);
+        if (val.val === " ") {
             setSearchTerm('');
         }
         else {
             setSearchTerm(val.val);
         }
 
-        if (keywords.keywords === undefined) {
+        if (keywords.keywords === " ") {
             setSelectedKeywords([]);
         }
         else {
             setSelectedKeywords(keywords.keywords.split("-"));
+            console.log("These are the selected keywords", selectedKeywords);
         }
 
-        if (state.state === undefined || isNaN(state.state)) {
+        if (state.state === " ") {
             setSelectedState('None');
         }
         else {
@@ -52,6 +55,9 @@ const SearchSidebar = () => {
             link += searchTerm;
             link += "/";
         }
+        else {
+            link += " /"
+        }
 
         if (selectedKeywords.length !== 0) {
             selectedKeywords.forEach((keyword) => {
@@ -61,14 +67,29 @@ const SearchSidebar = () => {
             link = link.substring(0, link.length - 1);
             link += "/";
         }
+        else{
+            link += " /"
+        }
 
         if (selectedState !== "None") {
             link += selectedState;
             link += "/";
         }
+        else {
+            link += " /"
+        }
 
         console.log("This is the link:", link);
         return link;
+    }
+
+    function handleOption(optionVal, optionView, selectedBank) {
+        if (selectedBank.includes(optionVal) || selectedState === optionVal) {
+            return <option value={optionVal} selected>{optionView}</option>
+        }
+        else{
+            return <option value={optionVal}>{optionView}</option>
+        }
     }
 
     return(
@@ -86,68 +107,67 @@ const SearchSidebar = () => {
                 <label htmlFor="exampleSelect2" className="form-label mt-4">Activity Search:</label>
                 <select multiple="yes" className="form-select" id="exampleSelect2"
                         onChange={(e) => handleSelectKeyword(e)}>
-                    <option value="Hiking">Hiking</option>
-                    <option value="Kayaking">Kayaking</option>
-                    <option value="Camping">Camping</option>
-                    <option value="Tours">Tours</option>
+                    {handleOption("Hiking", "Hiking", selectedKeywords)}
+                    {handleOption("Kayaking", "Kayaking", selectedKeywords)}
+                    {handleOption("Camping", "Camping", selectedKeywords)}
+                    {handleOption("Tours", "Tours", selectedKeywords)}
                 </select>
             </div>
             <div className="form-group">
                 <label htmlFor="exampleSelect2" className="form-label mt-4">State Search:</label>
                 <select className="form-select" id="exampleSelect2" onChange={(e) => setSelectedState(e.target.value)}>
-                    <option value="NONE">None</option>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="DC">District Of Columbia</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
-                    <option value="WY">Wyoming</option>
+                    {handleOption("NONE", "None", selectedState)}
+                    {handleOption("AL", "Alabama", selectedState)}
+                    {handleOption("AK", "Alaska", selectedState)}
+                    {handleOption("AZ", "Arizona", selectedState)}
+                    {handleOption("AR", "Arkansas", selectedState)}
+                    {handleOption("CA", "California", selectedState)}
+                    {handleOption("CO", "Colorado", selectedState)}
+                    {handleOption("CT", "Connecticut", selectedState)}
+                    {handleOption("DE", "Delaware", selectedState)}
+                    {handleOption("DC", "District Of Columbia", selectedState)}
+                    {handleOption("FL", "Florida", selectedState)}
+                    {handleOption("GA", "Georgia", selectedState)}
+                    {handleOption("HI", "Hawaii", selectedState)}
+                    {handleOption("ID", "Idaho", selectedState)}
+                    {handleOption("IL", "Illinois", selectedState)}
+                    {handleOption("IN", "Indiana", selectedState)}
+                    {handleOption("IA", "Iowa", selectedState)}
+                    {handleOption("KS", "Kansas", selectedState)}
+                    {handleOption("KY", "Kentucky", selectedState)}
+                    {handleOption("LA", "Louisiana", selectedState)}
+                    {handleOption("ME", "Maine", selectedState)}
+                    {handleOption("MD", "Maryland", selectedState)}
+                    {handleOption("MA", "Massachusetts", selectedState)}
+                    {handleOption("MI", "Michigan", selectedState)}
+                    {handleOption("MN", "Minnesota", selectedState)}
+                    {handleOption("MS", "Mississippi", selectedState)}
+                    {handleOption("MO", "Missouri", selectedState)}
+                    {handleOption("MT", "Montana", selectedState)}
+                    {handleOption("NE", "Nebraska", selectedState)}
+                    {handleOption("NV", "Nevada", selectedState)}
+                    {handleOption("NH", "New Hampshire", selectedState)}
+                    {handleOption("NJ", "New Jersey", selectedState)}
+                    {handleOption("NM", "New Mexico", selectedState)}
+                    {handleOption("NY", "New York", selectedState)}
+                    {handleOption("NC", "North Carolina", selectedState)}
+                    {handleOption("ND", "North Dakota", selectedState)}
+                    {handleOption("OH", "Ohio", selectedState)}
+                    {handleOption("OK", "Oklahoma", selectedState)}
+                    {handleOption("OR", "Oregon", selectedState)}
+                    {handleOption("PA", "Pennsylvania", selectedState)}
+                    {handleOption("RI", "Rhode Island", selectedState)}
+                    {handleOption("SC", "South Carolina", selectedState)}
+                    {handleOption("SD", "South Dakota", selectedState)}
+                    {handleOption("TN", "Tennessee", selectedState)}
+                    {handleOption("TX", "Texas", selectedState)}
+                    {handleOption("UT", "Utah", selectedState)}
+                    {handleOption("VT", "Vermont", selectedState)}
+                    {handleOption("VA", "Virginia", selectedState)}
+                    {handleOption("WA", "Washington", selectedState)}
+                    {handleOption("WV", "West Virginia", selectedState)}
+                    {handleOption("WI", "Wisconsin", selectedState)}
+                    {handleOption("WY", "Wyoming", selectedState)}
                 </select>
             </div>
             <br/>
