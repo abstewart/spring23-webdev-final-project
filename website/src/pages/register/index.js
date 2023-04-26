@@ -43,6 +43,7 @@ const Register = () => {
             email : rUser.email,
             username : rUser.username,
             password : rUser.pass1,
+            role : rUser.role,
         }
 
         try{
